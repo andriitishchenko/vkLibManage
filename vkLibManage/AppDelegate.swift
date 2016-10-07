@@ -12,10 +12,36 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    
+    /*
+     private func application(application: UIApplication, openURL url: URL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        let wasHandled:Bool = VKSdk.processOpen(url, fromApplication: sourceApplication)
+        
+        return wasHandled
+    }
+ */
 
+    func application(_ app: UIApplication,
+                              open url: URL,
+                              options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool
+    {
+        let wasHandled:Bool = VKSdk.processOpen(url, fromApplication: "com.vkLibManage")
+        
+        return wasHandled
+    }
 
+    /*
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool{
+        return true
+    }
+ */
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+       
         return true
     }
 

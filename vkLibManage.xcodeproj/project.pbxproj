@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21A33F5AB76DE38BE260FB81 /* libPods-vkLibManage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89505D1D7C8094213CBD5EB0 /* libPods-vkLibManage.a */; };
 		FE8638261DA56CBA00532752 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8638251DA56CBA00532752 /* AppDelegate.swift */; };
 		FE8638281DA56CBA00532752 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8638271DA56CBA00532752 /* ViewController.swift */; };
 		FE86382B1DA56CBA00532752 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE8638291DA56CBA00532752 /* Main.storyboard */; };
@@ -34,6 +35,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		15B87F6F317E207FAAE7F903 /* Pods-vkLibManage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vkLibManage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-vkLibManage/Pods-vkLibManage.debug.xcconfig"; sourceTree = "<group>"; };
+		82D565E69739767FE0DE47C7 /* Pods-vkLibManage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vkLibManage.release.xcconfig"; path = "Pods/Target Support Files/Pods-vkLibManage/Pods-vkLibManage.release.xcconfig"; sourceTree = "<group>"; };
+		89505D1D7C8094213CBD5EB0 /* libPods-vkLibManage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-vkLibManage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE8638221DA56CBA00532752 /* vkLibManage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vkLibManage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE8638251DA56CBA00532752 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE8638271DA56CBA00532752 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +51,8 @@
 		FE8638411DA56CBA00532752 /* vkLibManageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vkLibManageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE8638451DA56CBA00532752 /* vkLibManageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vkLibManageUITests.swift; sourceTree = "<group>"; };
 		FE8638471DA56CBA00532752 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FEE275441DA57470003142AD /* app-bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "app-bridge.h"; sourceTree = "<group>"; };
+		FEE275451DA57761003142AD /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21A33F5AB76DE38BE260FB81 /* libPods-vkLibManage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +81,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		810ED21378AD188195E5433D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				89505D1D7C8094213CBD5EB0 /* libPods-vkLibManage.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BD1ABA1BE35E0CF0DA038E7D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				15B87F6F317E207FAAE7F903 /* Pods-vkLibManage.debug.xcconfig */,
+				82D565E69739767FE0DE47C7 /* Pods-vkLibManage.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		FE8638191DA56CB900532752 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +105,8 @@
 				FE8638391DA56CBA00532752 /* vkLibManageTests */,
 				FE8638441DA56CBA00532752 /* vkLibManageUITests */,
 				FE8638231DA56CBA00532752 /* Products */,
+				BD1ABA1BE35E0CF0DA038E7D /* Pods */,
+				810ED21378AD188195E5433D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +129,8 @@
 				FE86382C1DA56CBA00532752 /* Assets.xcassets */,
 				FE86382E1DA56CBA00532752 /* LaunchScreen.storyboard */,
 				FE8638311DA56CBA00532752 /* Info.plist */,
+				FEE275441DA57470003142AD /* app-bridge.h */,
+				FEE275451DA57761003142AD /* PrefixHeader.pch */,
 			);
 			path = vkLibManage;
 			sourceTree = "<group>";
@@ -132,9 +160,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FE86384A1DA56CBA00532752 /* Build configuration list for PBXNativeTarget "vkLibManage" */;
 			buildPhases = (
+				F192BAEDE457F0F54F3BA8D7 /* [CP] Check Pods Manifest.lock */,
 				FE86381E1DA56CB900532752 /* Sources */,
 				FE86381F1DA56CB900532752 /* Frameworks */,
 				FE8638201DA56CB900532752 /* Resources */,
+				FD53A15D50F4E7E7DF7F2ABF /* [CP] Embed Pods Frameworks */,
+				6C628EBB700820E011C0822C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -256,6 +287,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6C628EBB700820E011C0822C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-vkLibManage/Pods-vkLibManage-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F192BAEDE457F0F54F3BA8D7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FD53A15D50F4E7E7DF7F2ABF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-vkLibManage/Pods-vkLibManage-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FE86381E1DA56CB900532752 /* Sources */ = {
@@ -413,26 +492,36 @@
 		};
 		FE86384B1DA56CBA00532752 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15B87F6F317E207FAAE7F903 /* Pods-vkLibManage.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = J4NANQ9H36;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/vkLibManage/PrefixHeader.pch";
 				INFOPLIST_FILE = vkLibManage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vkLibManage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/vkLibManage/app-bridge.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		FE86384C1DA56CBA00532752 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82D565E69739767FE0DE47C7 /* Pods-vkLibManage.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = J4NANQ9H36;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/vkLibManage/PrefixHeader.pch";
 				INFOPLIST_FILE = vkLibManage/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vkLibManage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/vkLibManage/app-bridge.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -514,6 +603,7 @@
 				FE86384C1DA56CBA00532752 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FE86384D1DA56CBA00532752 /* Build configuration list for PBXNativeTarget "vkLibManageTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +612,7 @@
 				FE86384F1DA56CBA00532752 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FE8638501DA56CBA00532752 /* Build configuration list for PBXNativeTarget "vkLibManageUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +621,7 @@
 				FE8638521DA56CBA00532752 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

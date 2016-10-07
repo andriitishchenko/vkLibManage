@@ -41,5 +41,48 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>vk5656175</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>vk5656175</string>
+                <string>vk</string>
+                <string>vk-share</string>
+                <string>vkauthorize</string>
+            </array>
+        </dict>
+    </array>
+    
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>vk</string>
+        <string>vk-share</string>
+        <string>vkauthorize</string>
+    </array>
+    
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>vk.com</key>
+            <dict>
+                <key>NSExceptionRequiresForwardSecrecy</key>
+                <false/>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+            </dict> 
+        </dict> 
+    </dict>
+    
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
 </dict>
 </plist>
