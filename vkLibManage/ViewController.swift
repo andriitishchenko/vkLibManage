@@ -58,24 +58,9 @@ class ViewController: UIViewController {
     }
     
     func startWorking() {
-        //self.performSegue(withIdentifier: "ListViewController", sender: self)
+        
         print("!!! SUCCESS !!!")
-        
-        
-        let audioReq:VKRequest = VKRequest.init(method: "audio.getAlbums", parameters: [:])
-        
-        audioReq.execute(resultBlock: { (response) in
-            print(response?.json)
-        }) { (err) in
-            
-                
-                if ((err as! NSError).code != Int(VK_API_ERROR)) {
-                    print("VK TRY REPEAT: %@",err?.localizedDescription)
-                    (err as! VKError).request.repeat()
-                } else {
-                    print("VK error: %@",err?.localizedDescription)
-                }
-         }
+        self.performSegue(withIdentifier: "PlaylistControllerSegue", sender: self)
     }
 }
 

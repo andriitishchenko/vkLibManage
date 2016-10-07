@@ -4,6 +4,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 #link_with ['vkLibManage', 'vkLibManageTests']
 target "vkLibManage" do
     pod 'VK-ios-sdk'
+    pod "YYModel"
     #pod 'REFrostedViewController'
     #pod 'JSONModel'
     #pod 'THLabel'

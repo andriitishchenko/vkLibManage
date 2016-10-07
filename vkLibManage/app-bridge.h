@@ -12,8 +12,10 @@
     #import <Foundation/Foundation.h>
     //@import VKSdkFramework;
     #import <VKSdk.h>   
+    #import <YYModel/YYModel.h>
 
 //    #import <VKSdkFramework/VKSdkFramework.h>
+
 
 
 #endif /* app_bridge_h */
