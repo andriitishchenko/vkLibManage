@@ -25,9 +25,7 @@ class BaseTableController: UIViewController,UITableViewDelegate, UITableViewData
     func refresh(_ sender:AnyObject) {
         DispatchQueue.global(qos: .userInitiated).async {
             print("refreshing")
-            sleep(2)
             DispatchQueue.main.async {
-                
                 self.reload()
                 self.refreshControl.endRefreshing()
             }
