@@ -44,6 +44,8 @@ class ViewController: UIViewController {
             }
         }
         
+        //test only
+        self.performSegue(withIdentifier: "PlaylistControllerSegue", sender: self)
         
         // Do any additional setup after loading the view, typically from a nib.
     }

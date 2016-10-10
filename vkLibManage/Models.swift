@@ -19,7 +19,15 @@ class TrackItem: NSObject {
     var owner_id:Int = 0;
     var title:String = "";
     var url:String = "";
-
+    
+    init(_ param:FileObject) {
+        id = Int(param.item_id)
+        title = param.title!
+        artist = param.artist!
+        album_id = Int(param.playlist_id)
+        url = param.url!
+    }
+    override init() {}
 }
 
 
@@ -27,6 +35,14 @@ class PlaylistItem : NSObject{
     var id:Int = 0
     var owner_id:Int = 0
     var title:String = ""
+    
+    init(_ param:PlaylistObject) {
+        id = Int(param.item_id)
+        title = param.title!
+    }
+    
+    override init() {}
+    
 }
 
 class Playlist : NSObject {

@@ -12,6 +12,11 @@
 		FE0997401DA8066E005539DB /* SongsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE09973F1DA8066E005539DB /* SongsListController.swift */; };
 		FE319C861DA7E2E300F5E1B1 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE319C851DA7E2E300F5E1B1 /* Models.swift */; };
 		FE319C881DA7E3CF00F5E1B1 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE319C871DA7E3CF00F5E1B1 /* API.swift */; };
+		FE35D09B1DABA77400A9F2B8 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE35D09A1DABA77400A9F2B8 /* DBManager.swift */; };
+		FE35D0A01DABA93000A9F2B8 /* FileObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE35D09C1DABA93000A9F2B8 /* FileObject+CoreDataClass.swift */; };
+		FE35D0A11DABA93000A9F2B8 /* FileObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE35D09D1DABA93000A9F2B8 /* FileObject+CoreDataProperties.swift */; };
+		FE35D0A21DABA93000A9F2B8 /* PlaylistObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE35D09E1DABA93000A9F2B8 /* PlaylistObject+CoreDataClass.swift */; };
+		FE35D0A31DABA93000A9F2B8 /* PlaylistObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE35D09F1DABA93000A9F2B8 /* PlaylistObject+CoreDataProperties.swift */; };
 		FE8638261DA56CBA00532752 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8638251DA56CBA00532752 /* AppDelegate.swift */; };
 		FE8638281DA56CBA00532752 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8638271DA56CBA00532752 /* ViewController.swift */; };
 		FE86382B1DA56CBA00532752 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE8638291DA56CBA00532752 /* Main.storyboard */; };
@@ -20,6 +25,8 @@
 		FE86383B1DA56CBA00532752 /* vkLibManageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE86383A1DA56CBA00532752 /* vkLibManageTests.swift */; };
 		FE8638461DA56CBA00532752 /* vkLibManageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8638451DA56CBA00532752 /* vkLibManageUITests.swift */; };
 		FEB6739E1DA7CE1D00AD93A8 /* PlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB6739D1DA7CE1D00AD93A8 /* PlaylistController.swift */; };
+		FEDAFD391DAB989B001BDC70 /* vkLibManage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FEDAFD371DAB989B001BDC70 /* vkLibManage.xcdatamodeld */; };
+		FEDAFD3B1DAB9CD2001BDC70 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAFD3A1DAB9CD2001BDC70 /* SyncManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +54,11 @@
 		FE09973F1DA8066E005539DB /* SongsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongsListController.swift; sourceTree = "<group>"; };
 		FE319C851DA7E2E300F5E1B1 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		FE319C871DA7E3CF00F5E1B1 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		FE35D09A1DABA77400A9F2B8 /* DBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DBManager.swift; path = DB/DBManager.swift; sourceTree = SOURCE_ROOT; };
+		FE35D09C1DABA93000A9F2B8 /* FileObject+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "FileObject+CoreDataClass.swift"; path = "../DB/FileObject+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FE35D09D1DABA93000A9F2B8 /* FileObject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "FileObject+CoreDataProperties.swift"; path = "../DB/FileObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FE35D09E1DABA93000A9F2B8 /* PlaylistObject+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PlaylistObject+CoreDataClass.swift"; path = "../DB/PlaylistObject+CoreDataClass.swift"; sourceTree = "<group>"; };
+		FE35D09F1DABA93000A9F2B8 /* PlaylistObject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PlaylistObject+CoreDataProperties.swift"; path = "../DB/PlaylistObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FE8638221DA56CBA00532752 /* vkLibManage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vkLibManage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE8638251DA56CBA00532752 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE8638271DA56CBA00532752 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +73,8 @@
 		FE8638451DA56CBA00532752 /* vkLibManageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vkLibManageUITests.swift; sourceTree = "<group>"; };
 		FE8638471DA56CBA00532752 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FEB6739D1DA7CE1D00AD93A8 /* PlaylistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistController.swift; sourceTree = "<group>"; };
+		FEDAFD381DAB989B001BDC70 /* test.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = test.xcdatamodel; sourceTree = "<group>"; };
+		FEDAFD3A1DAB9CD2001BDC70 /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		FEE275441DA57470003142AD /* app-bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "app-bridge.h"; sourceTree = "<group>"; };
 		FEE275451DA57761003142AD /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,9 +155,11 @@
 		FE8638241DA56CBA00532752 /* vkLibManage */ = {
 			isa = PBXGroup;
 			children = (
+				FEDAFD3C1DABA13E001BDC70 /* DB */,
 				FE319C841DA7E2B800F5E1B1 /* Objects */,
 				FE8638251DA56CBA00532752 /* AppDelegate.swift */,
 				FE319C871DA7E3CF00F5E1B1 /* API.swift */,
+				FEDAFD3A1DAB9CD2001BDC70 /* SyncManager.swift */,
 				FE8638271DA56CBA00532752 /* ViewController.swift */,
 				FE8638291DA56CBA00532752 /* Main.storyboard */,
 				FE86382C1DA56CBA00532752 /* Assets.xcassets */,
@@ -174,6 +190,19 @@
 				FE8638471DA56CBA00532752 /* Info.plist */,
 			);
 			path = vkLibManageUITests;
+			sourceTree = "<group>";
+		};
+		FEDAFD3C1DABA13E001BDC70 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				FE35D09C1DABA93000A9F2B8 /* FileObject+CoreDataClass.swift */,
+				FE35D09D1DABA93000A9F2B8 /* FileObject+CoreDataProperties.swift */,
+				FE35D09E1DABA93000A9F2B8 /* PlaylistObject+CoreDataClass.swift */,
+				FE35D09F1DABA93000A9F2B8 /* PlaylistObject+CoreDataProperties.swift */,
+				FEDAFD371DAB989B001BDC70 /* vkLibManage.xcdatamodeld */,
+				FE35D09A1DABA77400A9F2B8 /* DBManager.swift */,
+			);
+			name = DB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,13 +393,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEDAFD3B1DAB9CD2001BDC70 /* SyncManager.swift in Sources */,
 				FE8638281DA56CBA00532752 /* ViewController.swift in Sources */,
+				FE35D0A01DABA93000A9F2B8 /* FileObject+CoreDataClass.swift in Sources */,
+				FEDAFD391DAB989B001BDC70 /* vkLibManage.xcdatamodeld in Sources */,
+				FE35D0A31DABA93000A9F2B8 /* PlaylistObject+CoreDataProperties.swift in Sources */,
 				FE0997401DA8066E005539DB /* SongsListController.swift in Sources */,
 				FE8638261DA56CBA00532752 /* AppDelegate.swift in Sources */,
 				FE319C861DA7E2E300F5E1B1 /* Models.swift in Sources */,
 				FEB6739E1DA7CE1D00AD93A8 /* PlaylistController.swift in Sources */,
+				FE35D0A11DABA93000A9F2B8 /* FileObject+CoreDataProperties.swift in Sources */,
 				FE319C881DA7E3CF00F5E1B1 /* API.swift in Sources */,
+				FE35D0A21DABA93000A9F2B8 /* PlaylistObject+CoreDataClass.swift in Sources */,
 				FE0449CD1DA7D1EA00F1B35A /* BaseTableController.swift in Sources */,
+				FE35D09B1DABA77400A9F2B8 /* DBManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,7 +563,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/vkLibManage/PrefixHeader.pch";
 				INFOPLIST_FILE = vkLibManage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vkLibManage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -545,7 +581,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/vkLibManage/PrefixHeader.pch";
 				INFOPLIST_FILE = vkLibManage/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vkLibManage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -652,6 +688,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FEDAFD371DAB989B001BDC70 /* vkLibManage.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FEDAFD381DAB989B001BDC70 /* test.xcdatamodel */,
+			);
+			currentVersion = FEDAFD381DAB989B001BDC70 /* test.xcdatamodel */;
+			path = vkLibManage.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FE86381A1DA56CB900532752 /* Project object */;
 }

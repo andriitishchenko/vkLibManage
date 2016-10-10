@@ -9,16 +9,18 @@
 import UIKit
 
 
-typealias Dic = Dictionary<String,AnyObject>
-
 class PlaylistController:BaseTableController  {
     let cellId = "PlaylistCell"
     var selectedPlaylist:PlaylistItem? = nil
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let play = UIBarButtonItem(title: "Sync", style: .plain, target: self, action: #selector(startSync))
+        self.navigationItem.rightBarButtonItems = [play]
         self.reload()
-        // Do any additional setup after loading the view.
+        self.pullRefreshInection()
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,35 +40,20 @@ class PlaylistController:BaseTableController  {
         return cell
     }
     
-    
-    
-    
-    func reload()
-    {
-        let audioReq:VKRequest = VKRequest.init(method: "audio.getAlbums", parameters: [:])
-        
-        audioReq.execute(resultBlock: { (response) in
-            print(response?.json)
-            print(response?.parsedModel)
-            
-            
-            
-            let k = Playlist.yy_model(withJSON: (response?.json as! Dic))
-            
-            self.dataSource = k?.items
-            
-            self.tableView.reloadData()
-            
-        }) { (err) in
-            
-            
-            if ((err as! NSError).code != Int(VK_API_ERROR)) {
-                print("VK TRY REPEAT: %@",err?.localizedDescription)
-                (err as! VKError).request.repeat()
-            } else {
-                print("VK error: %@",err?.localizedDescription)
-            }
+    @IBAction func startSync(sender: UIButton?) {
+        SyncManager.sharedInstance.sync {
+            self.reload()
         }
+    }
+    
+    
+    override func reload()
+    {
+        DBManager.sharedInstance.getLocalPlaylists { list in
+            self.dataSource = list
+            self.tableView.reloadData()
+        }
+        
     }
     
     

@@ -9,11 +9,32 @@
 import UIKit
 
 class BaseTableController: UIViewController,UITableViewDelegate, UITableViewDataSource {
-    
+    var refreshControl:UIRefreshControl!
     var dataSource:Array? = []
     @IBOutlet weak var tableView: UITableView!
-    //var dataSource:Array = nil
     
+    func pullRefreshInection (){
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing ...")
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refreshControl)
+    }
+    
+    func reload(){}
+    
+    func refresh(_ sender:AnyObject) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            print("refreshing")
+            sleep(2)
+            DispatchQueue.main.async {
+                
+                self.reload()
+                self.refreshControl.endRefreshing()
+            }
+        }
+        
+        
+    }
     
     
 //    override func viewDidLoad() {

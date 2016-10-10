@@ -17,6 +17,7 @@ class SongsListController: BaseTableController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reload()
+        self.pullRefreshInection()
         // Do any additional setup after loading the view.
     }
     
@@ -38,24 +39,11 @@ class SongsListController: BaseTableController {
     }
     
     
-    func reload()
+    override func reload()
     {
-        if albumId == 0 {
-            return
-        }
-        let audioReq:VKRequest = VKRequest.init(method: "audio.get", parameters: ["album_id":albumId])
-        audioReq.execute(resultBlock: { (response) in
-            print(response?.json)
-            let k = TracksList.yy_model(withJSON: (response?.json as! Dic))
-            self.dataSource = k?.items
+        DBManager.sharedInstance.getLocalTracks(playlist_id: self.albumId) { list in
+            self.dataSource = list
             self.tableView.reloadData()
-        }) { (err) in
-            if ((err as! NSError).code != Int(VK_API_ERROR)) {
-                print("VK TRY REPEAT: %@",err?.localizedDescription)
-                (err as! VKError).request.repeat()
-            } else {
-                print("VK error: %@",err?.localizedDescription)
-            }
         }
     }
     
