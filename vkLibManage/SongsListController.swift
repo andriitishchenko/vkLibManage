@@ -12,14 +12,23 @@ class SongsListController: BaseTableController {
     
     let cellId = "PlaylistItemCell"
     
-    var albumId:Int = 0
+    var album:PlaylistItem? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reload()
         self.pullRefreshInection()
+        
+        let play = UIBarButtonItem(title: "Down", style: .plain, target: self, action: #selector(download_album))
+        self.navigationItem.rightBarButtonItems = [play]
+        
         // Do any additional setup after loading the view.
     }
+    
+    @IBAction func download_album(sender: UIButton?) {
+        SyncManager.sharedInstance.downloadPlaylist(self.album!)
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -41,7 +50,7 @@ class SongsListController: BaseTableController {
     
     override func reload()
     {
-        DBManager.sharedInstance.getLocalTracks(playlist_id: self.albumId) { list in
+        DBManager.sharedInstance.getLocalTracks(playlist_id: (self.album?.id)!) { list in
             self.dataSource = list
             self.tableView.reloadData()
         }

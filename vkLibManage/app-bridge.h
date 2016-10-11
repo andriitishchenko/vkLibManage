@@ -10,11 +10,16 @@
 #define app_bridge_h
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
-    //@import VKSdkFramework;
-    #import <VKSdk.h>   
+//    @import VKSdkFramework;
+    
+
+    #import <VK-ios-sdk/VKSdk.h>
+
     #import <YYModel/YYModel.h>
 
-//    #import <VKSdkFramework/VKSdkFramework.h>
+
+
+    //    #import <VKSdkFramework/VKSdkFramework.h>
 
 
 

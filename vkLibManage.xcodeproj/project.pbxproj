@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21A33F5AB76DE38BE260FB81 /* libPods-vkLibManage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89505D1D7C8094213CBD5EB0 /* libPods-vkLibManage.a */; };
+		D3FA0060A2C8865EC6FAFB54 /* Pods_vkLibManage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F542E3C29755632B634E130 /* Pods_vkLibManage.framework */; };
 		FE0449CD1DA7D1EA00F1B35A /* BaseTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0449CC1DA7D1EA00F1B35A /* BaseTableController.swift */; };
 		FE0997401DA8066E005539DB /* SongsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE09973F1DA8066E005539DB /* SongsListController.swift */; };
+		FE2BAF7D1DAD06430011A782 /* MZDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BAF7A1DAD06430011A782 /* MZDownloadManager.swift */; };
+		FE2BAF7E1DAD06430011A782 /* MZDownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BAF7B1DAD06430011A782 /* MZDownloadModel.swift */; };
+		FE2BAF7F1DAD06430011A782 /* MZUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BAF7C1DAD06430011A782 /* MZUtility.swift */; };
 		FE319C861DA7E2E300F5E1B1 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE319C851DA7E2E300F5E1B1 /* Models.swift */; };
 		FE319C881DA7E3CF00F5E1B1 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE319C871DA7E3CF00F5E1B1 /* API.swift */; };
 		FE35D09B1DABA77400A9F2B8 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE35D09A1DABA77400A9F2B8 /* DBManager.swift */; };
@@ -49,9 +52,12 @@
 /* Begin PBXFileReference section */
 		15B87F6F317E207FAAE7F903 /* Pods-vkLibManage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vkLibManage.debug.xcconfig"; path = "Pods/Target Support Files/Pods-vkLibManage/Pods-vkLibManage.debug.xcconfig"; sourceTree = "<group>"; };
 		82D565E69739767FE0DE47C7 /* Pods-vkLibManage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vkLibManage.release.xcconfig"; path = "Pods/Target Support Files/Pods-vkLibManage/Pods-vkLibManage.release.xcconfig"; sourceTree = "<group>"; };
-		89505D1D7C8094213CBD5EB0 /* libPods-vkLibManage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-vkLibManage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F542E3C29755632B634E130 /* Pods_vkLibManage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vkLibManage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE0449CC1DA7D1EA00F1B35A /* BaseTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableController.swift; sourceTree = "<group>"; };
 		FE09973F1DA8066E005539DB /* SongsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongsListController.swift; sourceTree = "<group>"; };
+		FE2BAF7A1DAD06430011A782 /* MZDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadManager.swift; sourceTree = "<group>"; };
+		FE2BAF7B1DAD06430011A782 /* MZDownloadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadModel.swift; sourceTree = "<group>"; };
+		FE2BAF7C1DAD06430011A782 /* MZUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZUtility.swift; sourceTree = "<group>"; };
 		FE319C851DA7E2E300F5E1B1 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		FE319C871DA7E3CF00F5E1B1 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		FE35D09A1DABA77400A9F2B8 /* DBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DBManager.swift; path = DB/DBManager.swift; sourceTree = SOURCE_ROOT; };
@@ -84,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21A33F5AB76DE38BE260FB81 /* libPods-vkLibManage.a in Frameworks */,
+				D3FA0060A2C8865EC6FAFB54 /* Pods_vkLibManage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,7 +114,7 @@
 		810ED21378AD188195E5433D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				89505D1D7C8094213CBD5EB0 /* libPods-vkLibManage.a */,
+				8F542E3C29755632B634E130 /* Pods_vkLibManage.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -155,6 +161,7 @@
 		FE8638241DA56CBA00532752 /* vkLibManage */ = {
 			isa = PBXGroup;
 			children = (
+				FEFA16551DAD414C0060C047 /* DownloadManager */,
 				FEDAFD3C1DABA13E001BDC70 /* DB */,
 				FE319C841DA7E2B800F5E1B1 /* Objects */,
 				FE8638251DA56CBA00532752 /* AppDelegate.swift */,
@@ -203,6 +210,16 @@
 				FE35D09A1DABA77400A9F2B8 /* DBManager.swift */,
 			);
 			name = DB;
+			sourceTree = "<group>";
+		};
+		FEFA16551DAD414C0060C047 /* DownloadManager */ = {
+			isa = PBXGroup;
+			children = (
+				FE2BAF7A1DAD06430011A782 /* MZDownloadManager.swift */,
+				FE2BAF7B1DAD06430011A782 /* MZDownloadModel.swift */,
+				FE2BAF7C1DAD06430011A782 /* MZUtility.swift */,
+			);
+			name = DownloadManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +295,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = J4NANQ9H36;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					FE8638351DA56CBA00532752 = {
 						CreatedOnToolsVersion = 8.0;
@@ -393,8 +415,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE2BAF7E1DAD06430011A782 /* MZDownloadModel.swift in Sources */,
 				FEDAFD3B1DAB9CD2001BDC70 /* SyncManager.swift in Sources */,
 				FE8638281DA56CBA00532752 /* ViewController.swift in Sources */,
+				FE2BAF7F1DAD06430011A782 /* MZUtility.swift in Sources */,
 				FE35D0A01DABA93000A9F2B8 /* FileObject+CoreDataClass.swift in Sources */,
 				FEDAFD391DAB989B001BDC70 /* vkLibManage.xcdatamodeld in Sources */,
 				FE35D0A31DABA93000A9F2B8 /* PlaylistObject+CoreDataProperties.swift in Sources */,
@@ -405,6 +429,7 @@
 				FE35D0A11DABA93000A9F2B8 /* FileObject+CoreDataProperties.swift in Sources */,
 				FE319C881DA7E3CF00F5E1B1 /* API.swift in Sources */,
 				FE35D0A21DABA93000A9F2B8 /* PlaylistObject+CoreDataClass.swift in Sources */,
+				FE2BAF7D1DAD06430011A782 /* MZDownloadManager.swift in Sources */,
 				FE0449CD1DA7D1EA00F1B35A /* BaseTableController.swift in Sources */,
 				FE35D09B1DABA77400A9F2B8 /* DBManager.swift in Sources */,
 			);

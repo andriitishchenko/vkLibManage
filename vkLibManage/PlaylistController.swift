@@ -72,7 +72,7 @@ class PlaylistController:BaseTableController  {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc:SongsListController = segue.destination as! SongsListController
-        vc.albumId = (self.selectedPlaylist?.id)!
+        vc.album = self.selectedPlaylist
     }
  
 

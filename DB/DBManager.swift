@@ -161,6 +161,7 @@ class DBManager: NSObject {
                 let searchResults = try request.execute()
                 if (searchResults.count > 0){
                     rez = searchResults.first
+                    rez?.url = item.url
                 }
                 else
                 {
@@ -182,6 +183,26 @@ class DBManager: NSObject {
             }
         })
         return rez!
+    }
+    
+    func updateTrackStatus(_ trackId:Int, status:FileObjectStatus){
+        let context = persistentContainer.viewContext
+        context.performAndWait({
+            let request : NSFetchRequest<FileObject> = FileObject.fetchRequest()
+            request.predicate = NSPredicate(format: "item_id == %d", trackId)
+            do {
+                let searchResults = try request.execute()
+                if (searchResults.count > 0){
+                    let file:FileObject = searchResults.first!
+                    file.status = status.rawValue
+                    try context.save()
+                }
+                
+            } catch {
+                print("Error with request: \(error)")
+            }
+        })
+
     }
     
     

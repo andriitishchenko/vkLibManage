@@ -19,6 +19,7 @@ class TrackItem: NSObject {
     var owner_id:Int = 0;
     var title:String = "";
     var url:String = "";
+    var status:FileObjectStatus = .None;
     
     init(_ param:FileObject) {
         id = Int(param.item_id)
@@ -26,6 +27,7 @@ class TrackItem: NSObject {
         artist = param.artist!
         album_id = Int(param.playlist_id)
         url = param.url!
+        status = FileObjectStatus(rawValue: param.status)!
     }
     override init() {}
 }

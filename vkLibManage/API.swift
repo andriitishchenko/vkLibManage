@@ -15,7 +15,7 @@ class API{
     static let sharedInstance: API = API()
     
     /*
-     get user audio albums
+        get user audio albums
      */
     func getUserAlbums(seccess:@escaping (Array<PlaylistItem>?)->Void, fail:@escaping (NSError?)->Void){
         let audioReq:VKRequest = VKRequest.init(method: "audio.getAlbums", parameters: [:])
@@ -35,6 +35,9 @@ class API{
         }
     }
     
+    /*
+        get audio tracks in album
+     */
     func getUserAudioInAlbum(albumId:Int, seccess:@escaping (Array<TrackItem>?)->Void, fail:@escaping (NSError?)->Void){
         if albumId == 0 {
             fail(nil)
