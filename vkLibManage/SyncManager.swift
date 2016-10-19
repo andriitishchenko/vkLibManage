@@ -57,9 +57,18 @@ class SyncManager: NSObject {
         DBManager.sharedInstance.getLocalTracks(playlist_id: item.id) { list in
             let dir = MZUtility.baseFilePath
             for track in list {
-                self.downloadManager.addDownloadTask( String(track.id).appending(".mp3"), fileURL: track.url, destinationPath: dir, tag:track.id)
+                if !SyncManager.isFileExist(String(track.id)) {
+                    self.downloadManager.addDownloadTask( String(track.id).appending(".mp3"), fileURL: track.url, destinationPath: dir, tag:track.id)
+                }
             }
         }
+    }
+    
+    static func isFileExist(_ file:String) -> Bool{
+        let filepath = MZUtility.baseFilePath.appending(file).appending(".mp3")
+        let url : URL = URL(fileURLWithPath: filepath as String)
+        let fileManager = FileManager.default
+        return fileManager.fileExists(atPath: url.path)
     }
     
 
@@ -96,6 +105,9 @@ extension SyncManager: MZDownloadManagerDelegate {
     
     func downloadRequestStarted(_ downloadModel: MZDownloadModel, index: Int) {
         DBManager.sharedInstance.updateTrackStatus(downloadModel.tag, status: .Started)
+        let cc = downloadManager.downloadingArray.count
+//        NotificationCenter.default.post(name: .AppNotificationsDownloadProgress, object: nil, userInfo:["data":NSNumber(value: cc)])
+        NotificationCenter.default.post(name: .AppNotificationsDownloadProgress, object: NSNumber(value: cc))
     }
     
     func downloadRequestDidPopulatedInterruptedTasks(_ downloadModels: [MZDownloadModel]) {
@@ -116,18 +128,26 @@ extension SyncManager: MZDownloadManagerDelegate {
     
     func downloadRequestCanceled(_ downloadModel: MZDownloadModel, index: Int) {
         DBManager.sharedInstance.updateTrackStatus(downloadModel.tag, status: .None)
+        let cc = downloadManager.downloadingArray.count
+        NotificationCenter.default.post(name: .AppNotificationsDownloadCompleted, object: NSNumber(value: cc))
     }
     
     func downloadRequestFinished(_ downloadModel: MZDownloadModel, index: Int) {
         DBManager.sharedInstance.updateTrackStatus(downloadModel.tag, status: .Done)
         downloadManager.presentNotificationForDownload("Ok", notifBody: "Download did completed")
         let docDirectoryPath : NSString = (MZUtility.baseFilePath as NSString).appendingPathComponent(downloadModel.fileName) as NSString
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: MZUtility.DownloadCompletedNotif as String), object: docDirectoryPath)
+
+        
+        
+        let cc = downloadManager.downloadingArray.count
+        NotificationCenter.default.post(name: .AppNotificationsDownloadCompleted, object: NSNumber(value: cc))
     }
     
     func downloadRequestDidFailedWithError(_ error: NSError, downloadModel: MZDownloadModel, index: Int) {
         DBManager.sharedInstance.updateTrackStatus(downloadModel.tag, status: .None)
         debugPrint("Error while downloading file: \(downloadModel.fileName)  Error: \(error)")
+        let cc = downloadManager.downloadingArray.count
+        NotificationCenter.default.post(name: .AppNotificationsDownloadCompleted, object: NSNumber(value: cc))
     }
     
     //Oppotunity to handle destination does not exists error

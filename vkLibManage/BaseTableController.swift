@@ -4,7 +4,7 @@
 //
 //  Created by Andrii Tiischenko on 10/7/16.
 //  Copyright © 2016 Andrii Tiischenko. All rights reserved.
-//
+//  http://stackoverflow.com/questions/38204703/notificationcenter-issue-on-swift-3
 
 import UIKit
 
@@ -32,6 +32,30 @@ class BaseTableController: UIViewController,UITableViewDelegate, UITableViewData
         }
         
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(progressBarUpdate(_:)), name: .AppNotificationsDownloadProgress , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(progressBarUpdate(_:)), name: .AppNotificationsDownloadCompleted , object: nil)
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func progressBarUpdate(_ notification: NSNotification){
+        
+        let param:NSNumber? = notification.object as? NSNumber
+        if ((param?.intValue)! > 0){
+            self.navigationItem.prompt = "Downloaded:" + (param?.stringValue)!
+        }
+        else
+        {
+            self.navigationItem.prompt = nil
+        }
     }
     
     

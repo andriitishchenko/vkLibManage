@@ -9,6 +9,20 @@
 import UIKit
 
 
+enum AppNotifications: String{
+    case DownloadProgress = "AppNotificationsDownloadProgress"
+    case DownloadCompleted = "AppNotificationsDownloadCompleted"
+}
+
+extension Notification.Name {
+    static let AppNotificationsDownloadProgress = Notification.Name("AppNotificationsDownloadProgress")
+    static let AppNotificationsDownloadCompleted = Notification.Name("AppNotificationsDownloadCompleted")
+}
+
+//= "notificationProgress"
+//let notificationProgress: String = "notificationProgress"
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

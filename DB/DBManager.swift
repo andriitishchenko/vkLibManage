@@ -174,9 +174,9 @@ class DBManager: NSObject {
                     rez?.url = item.url
                     rez?.status = FileObjectStatus.None.rawValue
                     //rez?.playlist =
-
-                    try context.save()
                 }
+                try context.save()
+
                 
             } catch {
                 print("Error with request: \(error)")

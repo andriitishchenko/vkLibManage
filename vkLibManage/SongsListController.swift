@@ -44,6 +44,10 @@ class SongsListController: BaseTableController {
         cell.textLabel?.text = item?.title
         cell.detailTextLabel?.text = item?.artist
         
+        if item?.status == .Done {
+            cell.accessoryType = .checkmark
+        }
+        
         return cell
     }
     
