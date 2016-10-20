@@ -44,21 +44,28 @@
 	<true/>
 	<key>NSAllowsArbitraryLoads</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>vk.com</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-				<key>NSExceptionRequiresForwardSecrecy</key>
-				<false/>
-				<key>NSIncludesSubdomains</key>
-				<true/>
-			</dict>
-		</dict>
-	</dict>
+    
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+    
+<!--	<key>NSAppTransportSecurity</key>-->
+<!--	<dict>-->
+<!--		<key>NSExceptionDomains</key>-->
+<!--		<dict>-->
+<!--			<key>vk.com</key>-->
+<!--			<dict>-->
+<!--				<key>NSExceptionAllowsInsecureHTTPLoads</key>-->
+<!--				<true/>-->
+<!--				<key>NSExceptionRequiresForwardSecrecy</key>-->
+<!--				<false/>-->
+<!--				<key>NSIncludesSubdomains</key>-->
+<!--				<true/>-->
+<!--			</dict>-->
+<!--		</dict>-->
+<!--	</dict>-->
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

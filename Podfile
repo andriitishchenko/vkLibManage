@@ -1,11 +1,12 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, "8.2"
+platform :ios, "9.0"
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 #link_with ['vkLibManage', 'vkLibManageTests']
 target "vkLibManage" do
     pod 'VK-ios-sdk'
     pod "YYModel"
+    pod 'Jukebox'
     #pod "MZDownloadManager"
     #pod 'REFrostedViewController'
     #pod 'JSONModel'

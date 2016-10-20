@@ -57,20 +57,28 @@ class SyncManager: NSObject {
         DBManager.sharedInstance.getLocalTracks(playlist_id: item.id) { list in
             let dir = MZUtility.baseFilePath
             for track in list {
-                if !SyncManager.isFileExist(String(track.id)) {
-                    self.downloadManager.addDownloadTask( String(track.id).appending(".mp3"), fileURL: track.url, destinationPath: dir, tag:track.id)
+                if !FileManager.isFileExistForID(track.id) {
+                    self.downloadManager.addDownloadTask( FileManager.makeFileNameForID(track.id), fileURL: track.url, destinationPath: dir, tag:track.id)
                 }
             }
         }
     }
     
-    static func isFileExist(_ file:String) -> Bool{
-        let filepath = MZUtility.baseFilePath.appending(file).appending(".mp3")
-        let url : URL = URL(fileURLWithPath: filepath as String)
-        let fileManager = FileManager.default
-        return fileManager.fileExists(atPath: url.path)
-    }
-    
+//    static func isFileExistForID(_ id:Int) -> Bool{
+//        let filepath = SyncManager.makeFilePathForID(id)
+//        let url : URL = URL(fileURLWithPath: filepath as String)
+//        let fileManager = FileManager.default
+//        return fileManager.fileExists(atPath: url.path)
+//    }
+//    
+//    static func makeFilePathForID(_ id:Int)->String{
+//        let fname = SyncManager.makeFileNameForID(id);
+//        return MZUtility.baseFilePath.appending(fname)
+//    }
+//    
+//    static func makeFileNameForID(_ id:Int)->String{
+//        return String(id).appending(".mp3")
+//    }
 
 
     
@@ -135,7 +143,7 @@ extension SyncManager: MZDownloadManagerDelegate {
     func downloadRequestFinished(_ downloadModel: MZDownloadModel, index: Int) {
         DBManager.sharedInstance.updateTrackStatus(downloadModel.tag, status: .Done)
         downloadManager.presentNotificationForDownload("Ok", notifBody: "Download did completed")
-        let docDirectoryPath : NSString = (MZUtility.baseFilePath as NSString).appendingPathComponent(downloadModel.fileName) as NSString
+        //let docDirectoryPath : NSString = (MZUtility.baseFilePath as NSString).appendingPathComponent(downloadModel.fileName) as NSString
 
         
         
@@ -150,17 +158,17 @@ extension SyncManager: MZDownloadManagerDelegate {
         NotificationCenter.default.post(name: .AppNotificationsDownloadCompleted, object: NSNumber(value: cc))
     }
     
-    //Oppotunity to handle destination does not exists error
-    //This delegate will be called on the session queue so handle it appropriately
-    func downloadRequestDestinationDoestNotExists(_ downloadModel: MZDownloadModel, index: Int, location: URL) {
-        DBManager.sharedInstance.updateTrackStatus(downloadModel.tag, status: .Done)
-        let myDownloadPath = MZUtility.baseFilePath + "/Default folder"
-        if !FileManager.default.fileExists(atPath: myDownloadPath) {
-            try! FileManager.default.createDirectory(atPath: myDownloadPath, withIntermediateDirectories: true, attributes: nil)
-        }
-        let fileName = MZUtility.getUniqueFileNameWithPath((myDownloadPath as NSString).appendingPathComponent(downloadModel.fileName as String) as NSString)
-        let path =  myDownloadPath + "/" + (fileName as String)
-        try! FileManager.default.moveItem(at: location, to: URL(fileURLWithPath: path))
-        debugPrint("Default folder path: \(myDownloadPath)")
-    }
+//    //Oppotunity to handle destination does not exists error
+//    //This delegate will be called on the session queue so handle it appropriately
+//    func downloadRequestDestinationDoestNotExists(_ downloadModel: MZDownloadModel, index: Int, location: URL) {
+//        DBManager.sharedInstance.updateTrackStatus(downloadModel.tag, status: .Done)
+//        let myDownloadPath = MZUtility.baseFilePath + "/Default folder"
+//        if !FileManager.default.fileExists(atPath: myDownloadPath) {
+//            try! FileManager.default.createDirectory(atPath: myDownloadPath, withIntermediateDirectories: true, attributes: nil)
+//        }
+//        let fileName = MZUtility.getUniqueFileNameWithPath((myDownloadPath as NSString).appendingPathComponent(downloadModel.fileName as String) as NSString)
+//        let path =  myDownloadPath + "/" + (fileName as String)
+//        try! FileManager.default.moveItem(at: location, to: URL(fileURLWithPath: path))
+//        debugPrint("Default folder path: \(myDownloadPath)")
+//    }
 }
