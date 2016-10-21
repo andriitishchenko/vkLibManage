@@ -2,7 +2,7 @@
 //  FileObject+CoreDataClass.swift
 //  
 //
-//  Created by Andrii Tiischenko on 10/10/16.
+//  Created by Andrii Tiischenko on 10/21/16.
 //
 //
 

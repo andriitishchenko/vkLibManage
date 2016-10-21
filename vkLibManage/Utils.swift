@@ -8,6 +8,25 @@
 
 import UIKit
 
+
+enum AppNotifications: String{
+    case DownloadProgress = "AppNotificationsDownloadProgress"
+    case DownloadCompleted = "AppNotificationsDownloadCompleted"
+}
+
+extension Notification.Name {
+    static let AppNotificationsDownloadProgress = Notification.Name("AppNotificationsDownloadProgress")
+    static let AppNotificationsDownloadCompleted = Notification.Name("AppNotificationsDownloadCompleted")
+    static let AppNotificationsSyncProgress = Notification.Name("AppNotificationsSyncProgress")
+}
+
+
+enum FileObjectStatus:Int {
+    case None
+    case Started
+    case Done
+}
+
 class Utils: NSObject {
 
 }

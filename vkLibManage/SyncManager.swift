@@ -35,13 +35,23 @@ class SyncManager: NSObject {
     
     func sync(finish:()->Void){
         API.sharedInstance.getUserAlbums(seccess: { list in
+            let totalCount = list?.count
+            var progress = 0
             for item in list! {
                 self.syncPlaylist(item)
                 API.sharedInstance.getUserAudioInAlbum(albumId: item.id, seccess: { listfiles in
-                    for item_file in listfiles! {
-                        self.syncFile(item_file)
-                    }
-                    
+                        for item_file in listfiles! {
+                            self.syncFile(item_file)
+                        }
+                        progress += 1
+                        if (progress == totalCount)
+                        {
+                            NotificationCenter.default.post(name: .AppNotificationsSyncProgress, object: nil)
+                        }
+                        else{
+                            let postObj = ProgressType(total: totalCount!, progress: progress)
+                            NotificationCenter.default.post(name: .AppNotificationsSyncProgress, object: postObj)
+                        }
                     }, fail: { (err) in
                         print("VK error: %@",err?.localizedDescription)
                 })

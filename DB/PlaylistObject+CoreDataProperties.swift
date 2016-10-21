@@ -2,7 +2,7 @@
 //  PlaylistObject+CoreDataProperties.swift
 //  
 //
-//  Created by Andrii Tiischenko on 10/10/16.
+//  Created by Andrii Tiischenko on 10/21/16.
 //
 //
 
@@ -19,6 +19,7 @@ extension PlaylistObject {
     @NSManaged public var is_sync: Bool
     @NSManaged public var item_id: Double
     @NSManaged public var title: String?
+    @NSManaged public var date_added: NSDate?
     @NSManaged public var files: NSSet?
 
 }

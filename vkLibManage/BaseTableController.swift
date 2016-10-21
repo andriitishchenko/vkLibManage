@@ -38,12 +38,27 @@ class BaseTableController: UIViewController,UITableViewDelegate, UITableViewData
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(progressBarUpdate(_:)), name: .AppNotificationsDownloadProgress , object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(progressBarUpdate(_:)), name: .AppNotificationsDownloadCompleted , object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(progressSyncUpdate(_:)), name: .AppNotificationsSyncProgress , object: nil)
+        
 
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    func progressSyncUpdate(_ notification: NSNotification){
+        
+        let param:ProgressType? = notification.object as? ProgressType
+        if (param != nil){
+            self.navigationItem.prompt = param?.toString()
+        }
+        else
+        {
+            self.navigationItem.prompt = nil
+        }
     }
     
     func progressBarUpdate(_ notification: NSNotification){

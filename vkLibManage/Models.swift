@@ -8,7 +8,19 @@
 
 import Foundation
 
-
+struct ProgressType {
+    var total:Int = 0
+    var progress:Int = 0
+    
+    func toString() -> String {
+        return String(self.progress)+" / "+String(self.total)
+    }
+    
+    init(total:Int,progress:Int) {
+        self.total = total
+        self.progress = progress
+    }
+}
 
 class TrackItem: NSObject {
     var id:Int = 0
