@@ -156,9 +156,16 @@ class DBManager: NSObject {
         var rez:FileObject? = nil
         let context = persistentContainer.viewContext
         context.performAndWait({
-            let request : NSFetchRequest<FileObject> = FileObject.fetchRequest()
-            request.predicate = NSPredicate(format: "item_id == %d", item.id)
             do {
+                
+                let request : NSFetchRequest<FileObject> = FileObject.fetchRequest()
+                request.predicate = NSPredicate(format: "item_id == %d", item.id)
+                
+                let requestPL : NSFetchRequest<PlaylistObject> = PlaylistObject.fetchRequest()
+                requestPL.predicate = NSPredicate(format: "item_id == %d", item.album_id)
+                let searchResultsPL = try requestPL.execute()
+                let pl:PlaylistObject? = searchResultsPL.first
+                
                 let searchResults = try request.execute()
                 if (searchResults.count > 0){
                     rez = searchResults.first
@@ -174,7 +181,7 @@ class DBManager: NSObject {
                     rez?.playlist_id = Double(item.album_id)
                     rez?.url = item.url
                     rez?.status = FileObjectStatus.None.rawValue
-                    //rez?.playlist =
+                    rez?.playlist = pl
                 }
                 try context.save()
 
@@ -206,11 +213,83 @@ class DBManager: NSObject {
 
     }
     
-    func removeTrack(_ trackId:Int)
+    func removePlaylistItems(_ items:[TrackItem])
     {
-
+        
     }
     
     
+    
+//    PLAYLIST
+    func addPlaylistItems(_ items:[TrackItem]){
+        let context = persistentContainer.viewContext
+        for item in items
+        {
+            context.performAndWait({
+                let request : NSFetchRequest<FileObject> = FileObject.fetchRequest()
+                request.predicate = NSPredicate(format: "item_id == %d", item.id)
+                    let searchResults = try request.execute()
+                    if (searchResults.count > 0){
+                        let file:FileObject = searchResults.first!
+                        var apl = NSEntityDescription.insertNewObject(forEntityName: "ActivePlaylistObject", into: context) as? ActivePlaylistObject
+                        apl?.item_id = Double(item.id)
+                        apl?.fileobject = file
+                    }
+            } as! () -> Void)
+        }
+        do {
+            try context.save()
+        } catch {
+            print("Error with request: \(error)")
+        }
+    }
+    
+    func replacePlaylistItemsWith(_ items:[TrackItem]){
+        let context = persistentContainer.viewContext
+        let request : NSFetchRequest<ActivePlaylistObject> = ActivePlaylistObject.fetchRequest()
+        request.returnsObjectsAsFaults = false
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: request as! NSFetchRequest<NSFetchRequestResult>)
+        
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
+        } catch let error as NSError {
+            debugPrint(error)
+        }
+        
+        self.addPlaylistItems(items)
+    }
+    
+    
+    func addPlaylistWithID(_ itemID:Int) {
+        self.getLocalTracks(playlist_id: itemID) { list in
+            DBManager.sharedInstance.addPlaylistItems(list)
+        }
+    }
+    
+    func replacePlaylistWithID(_ itemID:Int) {
+        self.getLocalTracks(playlist_id: itemID) { list in
+            DBManager.sharedInstance.replacePlaylistItemsWith(list)
+        }
+    }
+    
+    func getActivePlaylist() -> [TrackItem]{
+        let context = persistentContainer.viewContext
+        let request : NSFetchRequest<ActivePlaylistObject> = ActivePlaylistObject.fetchRequest()
+        var rezOut:Array<TrackItem> = []
+        do {
+            let searchResults = try request.execute()
+            for item:ActivePlaylistObject in searchResults{
+                let el:TrackItem = TrackItem(item.fileobject!)
+                rezOut.append(el)
+            }
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
+        
+        
+        return rezOut
+    }
     
 }

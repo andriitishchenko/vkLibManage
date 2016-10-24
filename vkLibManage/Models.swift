@@ -42,6 +42,16 @@ class TrackItem: NSObject {
         status = FileObjectStatus(rawValue: param.status)!
     }
     override init() {}
+    
+    func getFileURL() ->URL {
+        let fpath = FileManager.makeFilePathForID(id)
+        let url_mp3 : URL = URL(fileURLWithPath: fpath as String)
+        if FileManager.default.fileExists(atPath: url_mp3.path) {
+            return url_mp3
+        }
+        return URL(string:self.url)!
+    }
+    
 }
 
 

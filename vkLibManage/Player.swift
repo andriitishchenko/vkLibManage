@@ -115,6 +115,32 @@ class Player: NSObject, JukeboxDelegate {
             }
         }
     }
+    
+///     PLAYLIST CONTROL
+    
+    func getActivePlaylist() -> [TrackItem] {
+        return DBManager.sharedInstance.getActivePlaylist()
+    }
 
+    //add tracks from Playlust to the Active playlist
+    func addPlaylistToPlayQueue(_ item:PlaylistItem) {
+        DBManager.sharedInstance.addPlaylistWithID(item.id)
+    }
+    
+    //add tracks to the Active playlist
+    func addTracksToPlayQueue(_ list:[TrackItem]) {
+        DBManager.sharedInstance.addPlaylistItems(list)
+    }
+    
+    //play tack separately of playlist. Active playlist will not be changed
+    func PlayTrackStandalone(_ item:TrackItem) {
+        
+    }
+    //will replace whole Active playlist
+    func newPlaylistQueue(_ item:PlaylistItem) {
+        DBManager.sharedInstance.replacePlaylistWithID(item.id)
+    }
+    
+    
     
 }
