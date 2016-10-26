@@ -22,6 +22,7 @@
 		FE319C861DA7E2E300F5E1B1 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE319C851DA7E2E300F5E1B1 /* Models.swift */; };
 		FE319C881DA7E3CF00F5E1B1 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE319C871DA7E3CF00F5E1B1 /* API.swift */; };
 		FE35D09B1DABA77400A9F2B8 /* DBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE35D09A1DABA77400A9F2B8 /* DBManager.swift */; };
+		FE4FA9221DC130B3007AC72B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE4FA9211DC130B3007AC72B /* MediaPlayer.framework */; };
 		FE5DB62D1DB8D0A6004281BB /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5DB62C1DB8D0A6004281BB /* Utils.swift */; };
 		FE83BA5E1DB7F45F00D156D3 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE83BA5D1DB7F45F00D156D3 /* Player.swift */; };
 		FE8638261DA56CBA00532752 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8638251DA56CBA00532752 /* AppDelegate.swift */; };
@@ -32,6 +33,7 @@
 		FE86383B1DA56CBA00532752 /* vkLibManageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE86383A1DA56CBA00532752 /* vkLibManageTests.swift */; };
 		FE8638461DA56CBA00532752 /* vkLibManageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8638451DA56CBA00532752 /* vkLibManageUITests.swift */; };
 		FEB6739E1DA7CE1D00AD93A8 /* PlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB6739D1DA7CE1D00AD93A8 /* PlaylistController.swift */; };
+		FED1C1FD1DBF6B51009F6533 /* PrivatPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED1C1FC1DBF6B51009F6533 /* PrivatPlayer.swift */; };
 		FEDAFD391DAB989B001BDC70 /* vkLibManage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FEDAFD371DAB989B001BDC70 /* vkLibManage.xcdatamodeld */; };
 		FEDAFD3B1DAB9CD2001BDC70 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAFD3A1DAB9CD2001BDC70 /* SyncManager.swift */; };
 /* End PBXBuildFile section */
@@ -71,6 +73,7 @@
 		FE319C851DA7E2E300F5E1B1 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		FE319C871DA7E3CF00F5E1B1 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		FE35D09A1DABA77400A9F2B8 /* DBManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DBManager.swift; path = DB/DBManager.swift; sourceTree = SOURCE_ROOT; };
+		FE4FA9211DC130B3007AC72B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		FE5DB62C1DB8D0A6004281BB /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		FE83BA5D1DB7F45F00D156D3 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		FE8638221DA56CBA00532752 /* vkLibManage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vkLibManage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +90,7 @@
 		FE8638451DA56CBA00532752 /* vkLibManageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vkLibManageUITests.swift; sourceTree = "<group>"; };
 		FE8638471DA56CBA00532752 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FEB6739D1DA7CE1D00AD93A8 /* PlaylistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistController.swift; sourceTree = "<group>"; };
+		FED1C1FC1DBF6B51009F6533 /* PrivatPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivatPlayer.swift; sourceTree = "<group>"; };
 		FEDAFD381DAB989B001BDC70 /* test.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = test.xcdatamodel; sourceTree = "<group>"; };
 		FEDAFD3A1DAB9CD2001BDC70 /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		FEE275441DA57470003142AD /* app-bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "app-bridge.h"; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE4FA9221DC130B3007AC72B /* MediaPlayer.framework in Frameworks */,
 				D3FA0060A2C8865EC6FAFB54 /* Pods_vkLibManage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,6 +127,7 @@
 		810ED21378AD188195E5433D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FE4FA9211DC130B3007AC72B /* MediaPlayer.framework */,
 				8F542E3C29755632B634E130 /* Pods_vkLibManage.framework */,
 			);
 			name = Frameworks;
@@ -176,6 +182,7 @@
 				FE319C871DA7E3CF00F5E1B1 /* API.swift */,
 				FEDAFD3A1DAB9CD2001BDC70 /* SyncManager.swift */,
 				FE83BA5D1DB7F45F00D156D3 /* Player.swift */,
+				FED1C1FC1DBF6B51009F6533 /* PrivatPlayer.swift */,
 				FE5DB62C1DB8D0A6004281BB /* Utils.swift */,
 				FE8638271DA56CBA00532752 /* ViewController.swift */,
 				FE8638291DA56CBA00532752 /* Main.storyboard */,
@@ -429,6 +436,7 @@
 			files = (
 				FE27CB941DBA2FB500217F60 /* PlaylistObject+CoreDataProperties.swift in Sources */,
 				FE2BAF7E1DAD06430011A782 /* MZDownloadModel.swift in Sources */,
+				FED1C1FD1DBF6B51009F6533 /* PrivatPlayer.swift in Sources */,
 				FEDAFD3B1DAB9CD2001BDC70 /* SyncManager.swift in Sources */,
 				FE8638281DA56CBA00532752 /* ViewController.swift in Sources */,
 				FE2BAF7F1DAD06430011A782 /* MZUtility.swift in Sources */,
