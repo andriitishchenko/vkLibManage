@@ -17,27 +17,60 @@ import MediaPlayer
 }
 
 public struct PrivatPlayerMediaItem  {
-    var artist:String?
-    var title:String?
-    var album:String?
-    var artwork:UIImage?
-    var duration:Float = 0
+    var artist:String? = nil
+    var title:String? = nil
+    var album:String? = nil
+    var artwork:UIImage? = nil
+    var duration:Double = 0
     var time:Float = 0
+    var url:URL? = nil
+}
+
+private extension PrivatPlayerMediaItem{
+
+    mutating func update(_ item: AVMetadataItem) {
+        switch item.commonKey
+        {
+        case "title"? :
+            if title != nil { title = item.value as? String }
+        case "albumName"? :
+            if album != nil { album = item.value as? String }
+        case "artist"? :
+            if artist != nil { artist = item.value as? String }
+        case "artwork"? :
+            if artwork != nil { updateArtwork(item) }
+        default :
+            break
+        }
+    }
     
+    mutating func updateArtwork(_ item: AVMetadataItem) {
+        guard let value = item.value else { return }
+        let copiedValue: AnyObject = value.copy(with: nil) as AnyObject
+        
+        if let dict = copiedValue as? [AnyHashable: Any] {
+            //AVMetadataKeySpaceID3
+            if let imageData = dict["data"] as? Data {
+                artwork = UIImage(data: imageData)
+            }
+        } else if let data = copiedValue as? Data{
+            //AVMetadataKeySpaceiTunes
+            artwork = UIImage(data: data)
+        }
+    }
 }
 
 public struct PrivatPlayerUpdate {
     var isActive:Bool
-    var duration:Float
-    var time:Float
+    var duration:Double
+    var time:Double
 }
 
 public protocol PrivatPlayerDelegate:class {
-    func privatPlayerGetNextTrack() -> URL
-    func privatPlayerGetPrevTrack() -> URL
+    func privatPlayerGetNextTrack() -> PrivatPlayerMediaItem?
+    func privatPlayerGetPrevTrack() -> PrivatPlayerMediaItem?
     func privatPlayerDidStartedTrack()
     func privatPlayerDidFinishedTrack()
-    func privatPlayerGetMediaInfo() -> PrivatPlayerMediaItem?
 }
 
 public protocol PrivatPlayerDelegateUI:class {
@@ -57,30 +90,46 @@ class PrivatPlayer: NSObject {
         "playable",
         "hasProtectedContent"
     ]
+    
     weak var delegate    :   PrivatPlayerDelegate?
     weak var delegateUI  :   PrivatPlayerDelegateUI?
     let player = AVPlayer()
     let commandCenter:MPRemoteCommandCenter = MPRemoteCommandCenter.shared()
     
     
-    public var remoteNottification:Bool = false {
-        didSet {
-//            if (self.remoteNottification)
-//            {
-////                self.canBecomeFirstResponder()
-//                UIApplication.shared.beginReceivingRemoteControlEvents()
-//            }
-//            else
-//            {
-//                UIApplication.shared.endReceivingRemoteControlEvents()
-//            }
-        }
-    }
+//    public var remoteNottification:Bool = false {
+//        didSet {
+////            if (self.remoteNottification)
+////            {
+//////                self.canBecomeFirstResponder()
+////                UIApplication.shared.beginReceivingRemoteControlEvents()
+////            }
+////            else
+////            {
+////                UIApplication.shared.endReceivingRemoteControlEvents()
+////            }
+//        }
+//    }
     
     private var playerItem: AVPlayerItem? = nil {
         didSet {
+            
             player.replaceCurrentItem(with: self.playerItem)
-            player.play()
+            
+            if self.playerItem != nil {
+                NotificationCenter.default.addObserver(self, selector: #selector(self.playerItemDidPlayToEnd(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.playerItem)
+                
+                self.metaInfo?.duration = CMTimeGetSeconds((playerItem?.duration)!)
+                self.extractMeta(self.playerItem!, onUpdate: { item in
+                    self.metaInfo?.update(item)
+                })
+                
+                
+                player.play()
+            }
+            else{
+                NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.playerItem)
+            }
         }
     }
     
@@ -115,6 +164,13 @@ class PrivatPlayer: NSObject {
             guard let newAsset = asset else { return }
             
             asynchronouslyLoadURLAsset(newAsset)
+        }
+    }
+    
+    var metaInfo:PrivatPlayerMediaItem? = nil {
+        didSet{
+            guard metaInfo != nil else { return }
+            self.updateInfoCenter()
         }
     }
 
@@ -169,25 +225,29 @@ class PrivatPlayer: NSObject {
         }
     }
     
+    func play(_ media:PrivatPlayerMediaItem){
+        self.metaInfo = media
+        if let url:URL = self.metaInfo?.url {
+            asset = AVURLAsset(url: url, options: nil)
+        }
+    }
+    
     func requestNextAndPlay(){
     
-        let url:URL? = (self.delegate?.privatPlayerGetNextTrack())!
-        if (url == nil){
-            self.requestNextAndPlay()
-            return
+        self.metaInfo = self.delegate?.privatPlayerGetNextTrack()
+        
+        if let url:URL = self.metaInfo?.url {
+            asset = AVURLAsset(url: url, options: nil)
         }
-        asset = AVURLAsset(url: url!, options: nil)
     }
     
     func requestPrevAndPlay(){
+        self.metaInfo = self.delegate?.privatPlayerGetPrevTrack()
         
-        let url:URL? = (self.delegate?.privatPlayerGetPrevTrack())!
-        if (url == nil){
-            self.requestPrevAndPlay()
-            return
+        if let url:URL = self.metaInfo?.url {
+            asset = AVURLAsset(url: url, options: nil)
         }
-        asset = AVURLAsset(url: url!, options: nil)
-    }
+     }
     
     
     
@@ -281,11 +341,11 @@ class PrivatPlayer: NSObject {
             
             let hasValidDuration = newDuration.isNumeric && newDuration.value != 0
             let newDurationSeconds = hasValidDuration ? CMTimeGetSeconds(newDuration) : 0.0
-            let currentTime = hasValidDuration ? Float(CMTimeGetSeconds(player.currentTime())) : 0.0
+            let currentTime = hasValidDuration ? CMTimeGetSeconds(player.currentTime()) : 0.0
             
             let update:PrivatPlayerUpdate = PrivatPlayerUpdate(
                 isActive : hasValidDuration,
-                duration : Float(newDurationSeconds),
+                duration : newDurationSeconds,
                 time : currentTime
             )
             self.delegateUI?.privatPlayerUIUpdate(update)
@@ -334,14 +394,10 @@ class PrivatPlayer: NSObject {
 
     
     func handleErrorWithMessage(_ message: String?, error: Error? = nil) {
-        NSLog("Error occured with message: \(message), error: \(error).")
+        NSLog("||| Error occured with message:/n \(message), error: \(error).")
         self.delegateUI?.privatPlayerUIError(message, error: error)
     }
-    
-//    override func canBecomeFirstResponder() -> Bool {
-//        return true
-//    }
-    
+
     func registerUpdates()
     {
         addObserver(self, forKeyPath: #keyPath(PrivatPlayer.player.currentItem.duration), options: [.new, .initial], context: &PrivatPlayerKVOContext)
@@ -368,6 +424,14 @@ class PrivatPlayer: NSObject {
         removeObserver(self, forKeyPath: #keyPath(PrivatPlayer.player.rate), context: &PrivatPlayerKVOContext)
         removeObserver(self, forKeyPath: #keyPath(PrivatPlayer.player.currentItem.status), context: &PrivatPlayerKVOContext)
     }
+    
+    
+    @objc private func playerItemDidPlayToEnd(_ notification : Notification){
+        self.requestNextAndPlay()
+    }
+    
+
+    
 //    
 //    
 //    func remoteControlReceivedWithEvent(event: UIEvent) {
@@ -400,7 +464,8 @@ class PrivatPlayer: NSObject {
 //    {
 //    MPNowPlayingInfoCenter* info = [MPNowPlayingInfoCenter defaultCenter];
 //    NSMutableDictionary* newInfo = [NSMutableDictionary dictionary];
-//    NSSet* itemProperties = [NSSet setWithObjects:MPMediaItemPropertyTitle,
+//    NSSet* itemProperties = [NSSet setWithObjects:
+//    MPMediaItemPropertyTitle,
 //    MPMediaItemPropertyArtist,
 //    MPMediaItemPropertyPlaybackDuration,
 //    MPNowPlayingInfoPropertyElapsedPlaybackTime,
@@ -414,32 +479,49 @@ class PrivatPlayer: NSObject {
 //    info.nowPlayingInfo = newInfo;
 //    }
 
-    fileprivate func updateInfoCenter() {
+    
+    private func extractMeta(_ mediaItem:AVPlayerItem, onUpdate:@escaping (AVMetadataItem)->Void)
+    {
+        DispatchQueue.global(qos: .background).async {
+            let metadataArray = mediaItem.asset.commonMetadata
+            
+            for item in metadataArray
+            {
+                item.loadValuesAsynchronously(forKeys: [AVMetadataKeySpaceCommon], completionHandler: { () -> Void in
+                    DispatchQueue.main.async {
+                        onUpdate(item)
+                    }
+                })
+            }
+        }
+    }
+    
+    
+    private func updateInfoCenter() {
 
-        if let item = self.delegate?.privatPlayerGetMediaInfo()
+        if let item = self.metaInfo
         {
-            var nowPlayingInfo : [String : AnyObject] = [
+            var info : [String : AnyObject] = [
                 MPMediaItemPropertyPlaybackDuration : item.duration as AnyObject,
                 MPMediaItemPropertyTitle : item.title as AnyObject,
                 MPNowPlayingInfoPropertyElapsedPlaybackTime : item.time as AnyObject,
-                MPNowPlayingInfoPropertyPlaybackQueueCount :1 as AnyObject,
-                MPNowPlayingInfoPropertyPlaybackQueueIndex : 0 as AnyObject,
-                MPMediaItemPropertyMediaType : MPMediaType.anyAudio.rawValue as AnyObject
+//                MPNowPlayingInfoPropertyPlaybackQueueCount :1 as AnyObject,
+//                MPNowPlayingInfoPropertyPlaybackQueueIndex : 0 as AnyObject,
+//                MPMediaItemPropertyMediaType : MPMediaType.anyAudio.rawValue as AnyObject
             ]
             
             if let artist = item.artist {
-                nowPlayingInfo[MPMediaItemPropertyArtist] = artist as AnyObject?
+                info[MPMediaItemPropertyArtist] = artist as AnyObject?
             }
             
             if let album = item.album {
-                nowPlayingInfo[MPMediaItemPropertyAlbumTitle] = album as AnyObject?
+                info[MPMediaItemPropertyAlbumTitle] = album as AnyObject?
             }
             
             if let img = item.artwork {
-                nowPlayingInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(image: img)
+                info[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(image: img)
             }
-            
-            MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = info
         }
     }
 
@@ -482,6 +564,6 @@ class PrivatPlayer: NSObject {
     
     deinit {
         self.unregisterUpdates()
-        self.remoteNottification = false
+        
     }
 }

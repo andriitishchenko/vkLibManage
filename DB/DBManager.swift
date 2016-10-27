@@ -221,27 +221,32 @@ class DBManager: NSObject {
     
     
 //    PLAYLIST
-    func addPlaylistItems(_ items:[TrackItem]){
+    func addPlaylistItems(_ items:[TrackItem], finish:@escaping ()->Void){
         let context = persistentContainer.viewContext
-        for item in items
-        {
-            context.performAndWait({
-                let request : NSFetchRequest<FileObject> = FileObject.fetchRequest()
-                request.predicate = NSPredicate(format: "item_id == %d", item.id)
-                    let searchResults = try request.execute()
-                    if (searchResults.count > 0){
-                        let file:FileObject = searchResults.first!
-                        var apl = NSEntityDescription.insertNewObject(forEntityName: "ActivePlaylistObject", into: context) as? ActivePlaylistObject
-                        apl?.item_id = Double(item.id)
-                        apl?.fileobject = file
+        
+            context.perform({ () -> Void in
+                do {
+                    for item in items
+                    {
+                        let request : NSFetchRequest<FileObject> = FileObject.fetchRequest()
+                        request.predicate = NSPredicate(format: "item_id == %d", item.id)
+                    
+                            let searchResults = try request.execute()
+                            if (searchResults.count > 0){
+                                let file:FileObject = searchResults.first!
+                                var apl = NSEntityDescription.insertNewObject(forEntityName: "ActivePlaylistObject", into: context) as? ActivePlaylistObject
+                                apl?.item_id = Double(item.id)
+                                apl?.fileobject = file
+                                try context.save()
+                            }
                     }
-            } as! () -> Void)
-        }
-        do {
-            try context.save()
-        } catch {
-            print("Error with request: \(error)")
-        }
+                    try context.save()
+                } catch {
+                    print("Error with request: \(error)")
+                }
+                finish()
+            });
+    
     }
     
     func replacePlaylistItemsWith(_ items:[TrackItem]){
@@ -257,13 +262,13 @@ class DBManager: NSObject {
             debugPrint(error)
         }
         
-        self.addPlaylistItems(items)
+        self.addPlaylistItems(items,finish: {})
     }
     
     
     func addPlaylistWithID(_ itemID:Int) {
         self.getLocalTracks(playlist_id: itemID) { list in
-            DBManager.sharedInstance.addPlaylistItems(list)
+            DBManager.sharedInstance.addPlaylistItems(list, finish: {})
         }
     }
     
@@ -287,9 +292,43 @@ class DBManager: NSObject {
             let fetchError = error as NSError
             print(fetchError)
         }
-        
-        
         return rezOut
     }
+    
+    func getNextPlaylistItem () -> TrackItem? {
+        let context = persistentContainer.viewContext
+        let request : NSFetchRequest<ActivePlaylistObject> = ActivePlaylistObject.fetchRequest()
+        request.fetchLimit = 1
+        //request.sortDescriptors = NSSortDescriptor(key: "name", ascending: true)
+        //request.predicate = NSPredicate(format: "SELF.fileobject.playcount == fileobject.@min.playcount")
+        
+        
+        
+        //http://www.cimgf.com/2015/06/25/core-data-and-aggregate-fetches-in-swift/
+        
+        let kexp = NSExpression(forKeyPath: "fileobject.playcount")
+        let minExp = NSExpression(forFunction: "min:", arguments: [kexp])
+        let expr = NSExpressionDescription()
+        expr.name = "minPlay"
+        expr.expression = minExp
+        expr.expressionResultType = .doubleAttributeType
+        var expAny = [AnyObject]()
+        expAny.append(expr)
+        request.propertiesToFetch = expAny
+
+        
+        var rez:TrackItem? = nil
+        do {
+            let searchResults = try request.execute()
+            if let item = searchResults.first {
+                rez = TrackItem(item.fileobject!)
+            }
+        } catch {
+            let fetchError = error as NSError
+            print(fetchError)
+        }
+        return rez
+    }
+    
     
 }

@@ -11,8 +11,8 @@ import UIKit
 class SongsListController: BaseTableController {
     
     let cellId = "PlaylistItemCell"
-    
     var album:PlaylistItem? = nil
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +60,36 @@ class SongsListController: BaseTableController {
         }
     }
     
+    @IBAction func toolBarClick(sender: UIBarButtonItem?) {
+        var item:TrackItem? = nil
+        if (self.selectedIndex != nil ) {
+           item = (self.dataSource?[(self.selectedIndex?.row)!] as? TrackItem)!
+        }
+        
+        switch (sender?.tag)! {
+            case 200: //del
+            
+            break
+            case 100: //download
+                
+            break
+            case 10: //move
+            
+            break
+            case 50: //play
+                Player.sharedInstance.PlayTrackStandalone(item!)
+            break
+            case 60: //add to queue
+                Player.sharedInstance.addTracksToPlayQueue(self.dataSource as! [TrackItem])
+            break
+            default:break
+            
+        }
+        
+        
+        
+        
+    }
 
     /*
     // MARK: - Navigation

@@ -51,7 +51,6 @@ class TrackItem: NSObject {
         }
         return URL(string:self.url)!
     }
-    
 }
 
 

@@ -74,6 +74,11 @@ class PlaylistController:BaseTableController  {
         let vc:SongsListController = segue.destination as! SongsListController
         vc.album = self.selectedPlaylist
     }
+    
+    
+    @IBAction func toolBarClick(sender: UIBarButtonItem?) {
+        
+    }
  
 
 }

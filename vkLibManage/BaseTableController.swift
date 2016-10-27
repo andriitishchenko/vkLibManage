@@ -11,6 +11,7 @@ import UIKit
 class BaseTableController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     var refreshControl:UIRefreshControl!
     var dataSource:Array? = []
+    var selectedIndex:IndexPath? = nil
     @IBOutlet weak var tableView: UITableView!
     
     func pullRefreshInection (){
@@ -108,8 +109,7 @@ class BaseTableController: UIViewController,UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let cell = tableView.cellForRow(at: indexPath)
-        //        if cell != nil {}
+        self.selectedIndex = indexPath
     }
  
 

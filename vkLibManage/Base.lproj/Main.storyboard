@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -54,15 +53,15 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="46" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="X6d-eU-hcS">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistCell" textLabel="ehD-6e-d0i" rowHeight="46" style="IBUITableViewCellStyleDefault" id="Tr1-qD-Esx">
-                                        <rect key="frame" x="0.0" y="92" width="343" height="46"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistCell" textLabel="ehD-6e-d0i" style="IBUITableViewCellStyleDefault" id="Tr1-qD-Esx">
+                                        <rect key="frame" x="0.0" y="92" width="375" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Tr1-qD-Esx" id="tn3-nE-u4H">
-                                            <frame key="frameInset" width="343" height="45"/>
+                                            <frame key="frameInset" width="375" height="45.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ehD-6e-d0i">
-                                                    <frame key="frameInset" minX="15" width="313" height="45"/>
+                                                    <frame key="frameInset" minX="15" width="345" height="45.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -80,9 +79,9 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="XbC-Pc-t43" firstAttribute="top" secondItem="X6d-eU-hcS" secondAttribute="bottom" id="Bos-U7-xnA"/>
-                            <constraint firstItem="X6d-eU-hcS" firstAttribute="leading" secondItem="Qc4-3r-qX1" secondAttribute="leadingMargin" id="MHb-bM-5ID"/>
-                            <constraint firstItem="X6d-eU-hcS" firstAttribute="top" secondItem="VAX-8K-L1E" secondAttribute="bottom" id="fMN-QT-06l"/>
-                            <constraint firstItem="X6d-eU-hcS" firstAttribute="trailing" secondItem="Qc4-3r-qX1" secondAttribute="trailingMargin" id="n0e-d6-U3H"/>
+                            <constraint firstItem="X6d-eU-hcS" firstAttribute="leading" secondItem="Qc4-3r-qX1" secondAttribute="leading" id="MHb-bM-5ID"/>
+                            <constraint firstItem="X6d-eU-hcS" firstAttribute="trailing" secondItem="Qc4-3r-qX1" secondAttribute="trailing" id="n0e-d6-U3H"/>
+                            <constraint firstItem="X6d-eU-hcS" firstAttribute="top" secondItem="VAX-8K-L1E" secondAttribute="bottom" id="ssP-hq-YvD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="p8C-OA-h2J"/>
@@ -149,16 +148,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1Z9-S2-5K6">
-                                <frame key="frameInset" minX="6" minY="72" width="353" height="551"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1Z9-S2-5K6">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlaylistItemCell" id="at4-9A-0jL">
-                                        <rect key="frame" x="0.0" y="92" width="353" height="44"/>
+                                        <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="at4-9A-0jL" id="vLq-mW-rNV">
-                                            <frame key="frameInset" width="353" height="43"/>
+                                            <frame key="frameInset" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -168,19 +165,46 @@
                                     <outlet property="delegate" destination="Fnl-hw-hkI" id="5D1-NF-78w"/>
                                 </connections>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1pW-zX-xyl">
-                                <frame key="frameInset" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1pW-zX-xyl">
                                 <items>
-                                    <barButtonItem title="Delete" id="4O1-XD-ts3"/>
-                                    <barButtonItem title="MoveTo" id="oMy-vz-HGt"/>
-                                    <barButtonItem title="Play" id="1aQ-xy-8xJ"/>
-                                    <barButtonItem title="PlayQueue" id="uCa-rH-hh2"/>
-                                    <barButtonItem title="Offline" id="rVc-TI-xMJ"/>
+                                    <barButtonItem tag="200" title="Delete" id="4O1-XD-ts3">
+                                        <connections>
+                                            <action selector="toolBarClickWithSender:" destination="Fnl-hw-hkI" id="I5N-wv-uWn"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem tag="10" title="MoveTo" id="oMy-vz-HGt">
+                                        <connections>
+                                            <action selector="toolBarClickWithSender:" destination="Fnl-hw-hkI" id="QPy-Ms-v5b"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem tag="50" title="Play" id="1aQ-xy-8xJ">
+                                        <connections>
+                                            <action selector="toolBarClickWithSender:" destination="Fnl-hw-hkI" id="piw-5y-NlH"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem tag="60" title="PlayQueue" id="uCa-rH-hh2">
+                                        <connections>
+                                            <action selector="toolBarClickWithSender:" destination="Fnl-hw-hkI" id="fe9-ZH-H23"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem tag="100" title="Offline" id="rVc-TI-xMJ">
+                                        <connections>
+                                            <action selector="toolBarClickWithSender:" destination="Fnl-hw-hkI" id="4vG-VL-qus"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1pW-zX-xyl" firstAttribute="top" secondItem="1Z9-S2-5K6" secondAttribute="bottom" id="GvN-9Q-nzN"/>
+                            <constraint firstItem="OBv-Ab-VMy" firstAttribute="top" secondItem="1pW-zX-xyl" secondAttribute="bottom" id="IKa-9a-jqg"/>
+                            <constraint firstItem="1Z9-S2-5K6" firstAttribute="leading" secondItem="YH1-rF-72R" secondAttribute="leading" id="QJE-R0-9UA"/>
+                            <constraint firstItem="1pW-zX-xyl" firstAttribute="leading" secondItem="YH1-rF-72R" secondAttribute="leading" id="S3F-oK-Tea"/>
+                            <constraint firstAttribute="trailing" secondItem="1Z9-S2-5K6" secondAttribute="trailing" id="VP4-wJ-yXQ"/>
+                            <constraint firstItem="1Z9-S2-5K6" firstAttribute="top" secondItem="b4i-TS-1if" secondAttribute="bottom" id="pQo-FC-2dn"/>
+                            <constraint firstAttribute="trailing" secondItem="1pW-zX-xyl" secondAttribute="trailing" id="sXY-mR-ifL"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="1Z9-S2-5K6" id="d3P-VT-iqR"/>

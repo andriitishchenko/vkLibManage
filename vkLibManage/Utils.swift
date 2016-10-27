@@ -39,8 +39,8 @@ extension FileManager {
     }
     
     static func makeFilePathForID(_ id:Int)->String{
-        let fname = FileManager.makeFileNameForID(id);
-        return MZUtility.baseFilePath.appending(fname)
+        let fname:String = FileManager.makeFileNameForID(id);
+        return (MZUtility.baseFilePath as NSString).appendingPathComponent(fname)
     }
     
     static func makeFileNameForID(_ id:Int)->String{
