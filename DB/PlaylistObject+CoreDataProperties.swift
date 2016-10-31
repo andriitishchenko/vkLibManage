@@ -2,13 +2,13 @@
 //  PlaylistObject+CoreDataProperties.swift
 //  
 //
-//  Created by Andrii Tiischenko on 10/21/16.
+//  Created by Andrii Tiischenko on 10/31/16.
 //
 //
 
 import Foundation
 import CoreData
- 
+
 
 extension PlaylistObject {
 
@@ -16,10 +16,10 @@ extension PlaylistObject {
         return NSFetchRequest<PlaylistObject>(entityName: "PlaylistObject");
     }
 
+    @NSManaged public var date_added: NSDate?
     @NSManaged public var is_sync: Bool
     @NSManaged public var item_id: Double
     @NSManaged public var title: String?
-    @NSManaged public var date_added: NSDate?
     @NSManaged public var files: NSSet?
 
 }

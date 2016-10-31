@@ -158,10 +158,14 @@ class Player: NSObject, PrivatPlayerDelegate {
     
     
 ///     PLAYLIST CONTROL
-    
-    func getActivePlaylist() -> [TrackItem] {
-        return DBManager.sharedInstance.getActivePlaylist()
+  
+    func play(){
+      self.privatePlayer.play()
     }
+
+//    func getActivePlaylist() -> [TrackItem] {
+//        return DBManager.sharedInstance.getActivePlaylist()
+//    }
 
     //add tracks from Playlust to the Active playlist
     func addPlaylistToPlayQueue(_ item:PlaylistItem) {

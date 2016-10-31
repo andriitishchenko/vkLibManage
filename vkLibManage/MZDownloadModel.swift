@@ -29,7 +29,7 @@ public enum TaskStatus: Int {
 
 open class MZDownloadModel: NSObject {
     
-    open var tag: Int!
+    open var tag: Double!
     open var fileName: String!
     open var fileURL: String!
     open var status: String = TaskStatus.gettingInfo.description()

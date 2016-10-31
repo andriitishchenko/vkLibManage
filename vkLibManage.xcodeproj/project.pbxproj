@@ -14,8 +14,6 @@
 		FE27CB921DBA2FB500217F60 /* FileObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE27CB8C1DBA2FB500217F60 /* FileObject+CoreDataProperties.swift */; };
 		FE27CB931DBA2FB500217F60 /* PlaylistObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE27CB8D1DBA2FB500217F60 /* PlaylistObject+CoreDataClass.swift */; };
 		FE27CB941DBA2FB500217F60 /* PlaylistObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE27CB8E1DBA2FB500217F60 /* PlaylistObject+CoreDataProperties.swift */; };
-		FE27CB951DBA2FB500217F60 /* ActivePlaylistObject+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE27CB8F1DBA2FB500217F60 /* ActivePlaylistObject+CoreDataClass.swift */; };
-		FE27CB961DBA2FB500217F60 /* ActivePlaylistObject+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE27CB901DBA2FB500217F60 /* ActivePlaylistObject+CoreDataProperties.swift */; };
 		FE2BAF7D1DAD06430011A782 /* MZDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BAF7A1DAD06430011A782 /* MZDownloadManager.swift */; };
 		FE2BAF7E1DAD06430011A782 /* MZDownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BAF7B1DAD06430011A782 /* MZDownloadModel.swift */; };
 		FE2BAF7F1DAD06430011A782 /* MZUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2BAF7C1DAD06430011A782 /* MZUtility.swift */; };
@@ -36,6 +34,7 @@
 		FED1C1FD1DBF6B51009F6533 /* PrivatPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED1C1FC1DBF6B51009F6533 /* PrivatPlayer.swift */; };
 		FEDAFD391DAB989B001BDC70 /* vkLibManage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FEDAFD371DAB989B001BDC70 /* vkLibManage.xcdatamodeld */; };
 		FEDAFD3B1DAB9CD2001BDC70 /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAFD3A1DAB9CD2001BDC70 /* SyncManager.swift */; };
+		FEE2A8361DC7D032007BC813 /* ActivePlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE2A8351DC7D032007BC813 /* ActivePlaylistController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,8 +64,6 @@
 		FE27CB8C1DBA2FB500217F60 /* FileObject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "FileObject+CoreDataProperties.swift"; path = "../DB/FileObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FE27CB8D1DBA2FB500217F60 /* PlaylistObject+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PlaylistObject+CoreDataClass.swift"; path = "../DB/PlaylistObject+CoreDataClass.swift"; sourceTree = "<group>"; };
 		FE27CB8E1DBA2FB500217F60 /* PlaylistObject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PlaylistObject+CoreDataProperties.swift"; path = "../DB/PlaylistObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		FE27CB8F1DBA2FB500217F60 /* ActivePlaylistObject+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ActivePlaylistObject+CoreDataClass.swift"; path = "../DB/ActivePlaylistObject+CoreDataClass.swift"; sourceTree = "<group>"; };
-		FE27CB901DBA2FB500217F60 /* ActivePlaylistObject+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ActivePlaylistObject+CoreDataProperties.swift"; path = "../DB/ActivePlaylistObject+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FE2BAF7A1DAD06430011A782 /* MZDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadManager.swift; sourceTree = "<group>"; };
 		FE2BAF7B1DAD06430011A782 /* MZDownloadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadModel.swift; sourceTree = "<group>"; };
 		FE2BAF7C1DAD06430011A782 /* MZUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZUtility.swift; sourceTree = "<group>"; };
@@ -95,6 +92,7 @@
 		FEDAFD3A1DAB9CD2001BDC70 /* SyncManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncManager.swift; sourceTree = "<group>"; };
 		FEE275441DA57470003142AD /* app-bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "app-bridge.h"; sourceTree = "<group>"; };
 		FEE275451DA57761003142AD /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		FEE2A8351DC7D032007BC813 /* ActivePlaylistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivePlaylistController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +192,7 @@
 				FEB6739D1DA7CE1D00AD93A8 /* PlaylistController.swift */,
 				FE09973F1DA8066E005539DB /* SongsListController.swift */,
 				FE0449CC1DA7D1EA00F1B35A /* BaseTableController.swift */,
+				FEE2A8351DC7D032007BC813 /* ActivePlaylistController.swift */,
 			);
 			path = vkLibManage;
 			sourceTree = "<group>";
@@ -223,8 +222,6 @@
 				FE27CB8C1DBA2FB500217F60 /* FileObject+CoreDataProperties.swift */,
 				FE27CB8D1DBA2FB500217F60 /* PlaylistObject+CoreDataClass.swift */,
 				FE27CB8E1DBA2FB500217F60 /* PlaylistObject+CoreDataProperties.swift */,
-				FE27CB8F1DBA2FB500217F60 /* ActivePlaylistObject+CoreDataClass.swift */,
-				FE27CB901DBA2FB500217F60 /* ActivePlaylistObject+CoreDataProperties.swift */,
 				FEDAFD371DAB989B001BDC70 /* vkLibManage.xcdatamodeld */,
 				FE35D09A1DABA77400A9F2B8 /* DBManager.swift */,
 			);
@@ -443,16 +440,15 @@
 				FE27CB931DBA2FB500217F60 /* PlaylistObject+CoreDataClass.swift in Sources */,
 				FE27CB911DBA2FB500217F60 /* FileObject+CoreDataClass.swift in Sources */,
 				FEDAFD391DAB989B001BDC70 /* vkLibManage.xcdatamodeld in Sources */,
+				FEE2A8361DC7D032007BC813 /* ActivePlaylistController.swift in Sources */,
 				FE0997401DA8066E005539DB /* SongsListController.swift in Sources */,
 				FE8638261DA56CBA00532752 /* AppDelegate.swift in Sources */,
 				FE319C861DA7E2E300F5E1B1 /* Models.swift in Sources */,
-				FE27CB961DBA2FB500217F60 /* ActivePlaylistObject+CoreDataProperties.swift in Sources */,
 				FEB6739E1DA7CE1D00AD93A8 /* PlaylistController.swift in Sources */,
 				FE319C881DA7E3CF00F5E1B1 /* API.swift in Sources */,
 				FE2BAF7D1DAD06430011A782 /* MZDownloadManager.swift in Sources */,
 				FE0449CD1DA7D1EA00F1B35A /* BaseTableController.swift in Sources */,
 				FE83BA5E1DB7F45F00D156D3 /* Player.swift in Sources */,
-				FE27CB951DBA2FB500217F60 /* ActivePlaylistObject+CoreDataClass.swift in Sources */,
 				FE27CB921DBA2FB500217F60 /* FileObject+CoreDataProperties.swift in Sources */,
 				FE5DB62D1DB8D0A6004281BB /* Utils.swift in Sources */,
 				FE35D09B1DABA77400A9F2B8 /* DBManager.swift in Sources */,

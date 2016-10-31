@@ -193,7 +193,7 @@ class DBManager: NSObject {
         return rez!
     }
     
-    func updateTrackStatus(_ trackId:Int, status:FileObjectStatus){
+    func updateTrackStatus(_ trackId:Double, status:FileObjectStatus){
         let context = persistentContainer.viewContext
         context.performAndWait({
             let request : NSFetchRequest<FileObject> = FileObject.fetchRequest()
@@ -219,50 +219,75 @@ class DBManager: NSObject {
     }
     
     
+//    func getFileObjectInContext(_ item_id:Double, context:NSManagedObjectContext, result:@escaping (FileObject?) -> Void ) {
+//        context.perform({ () -> Void in
+//            var rez:FileObject? = nil
+//            do {
+//                let request : NSFetchRequest<FileObject> = FileObject.fetchRequest()
+//                request.predicate = NSPredicate(format: "item_id == %d", item_id)
+//                request.fetchLimit = 1
+//                let searchResults = try request.execute()
+//                rez = searchResults.first
+//            } catch {
+//                print("Error with request: \(error)")
+//            }
+//            result(rez)
+//        });
+//    }
+  
     
 //    PLAYLIST
     func addPlaylistItems(_ items:[TrackItem], finish:@escaping ()->Void){
         let context = persistentContainer.viewContext
-        
             context.perform({ () -> Void in
                 do {
                     for item in items
                     {
-                        let request : NSFetchRequest<FileObject> = FileObject.fetchRequest()
-                        request.predicate = NSPredicate(format: "item_id == %d", item.id)
-                    
-                            let searchResults = try request.execute()
-                            if (searchResults.count > 0){
-                                let file:FileObject = searchResults.first!
-                                var apl = NSEntityDescription.insertNewObject(forEntityName: "ActivePlaylistObject", into: context) as? ActivePlaylistObject
-                                apl?.item_id = Double(item.id)
-                                apl?.fileobject = file
-                                try context.save()
-                            }
+                      let request : NSFetchRequest<FileObject> = FileObject.fetchRequest()
+                          request.predicate = NSPredicate(format: "item_id == %@", item.id as NSNumber)
+                          request.fetchLimit = 1
+                          let searchResults = try request.execute()
+                          if let fo:FileObject = searchResults.first {
+                            fo.is_in_queue = true
+                          }
                     }
                     try context.save()
                 } catch {
                     print("Error with request: \(error)")
                 }
+              
+              
                 finish()
             });
-    
     }
     
-    func replacePlaylistItemsWith(_ items:[TrackItem]){
-        let context = persistentContainer.viewContext
-        let request : NSFetchRequest<ActivePlaylistObject> = ActivePlaylistObject.fetchRequest()
-        request.returnsObjectsAsFaults = false
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: request as! NSFetchRequest<NSFetchRequestResult>)
-        
+//   CLEAR QUEUE PLAYLIST 
+    func clearPlaylistQueue(context:NSManagedObjectContext?, finish:@escaping ()->Void) {
+        let moc:NSManagedObjectContext = (context != nil) ? context! : persistentContainer.viewContext
+        let updateRequest = NSBatchUpdateRequest(entityName: NSStringFromClass(FileObject.self))
+        updateRequest.predicate = NSPredicate(format: "is_in_queue == %@", true as NSNumber)
+        updateRequest.propertiesToUpdate = ["is_in_queue": (false as NSNumber) ]
+        updateRequest.resultType = .updatedObjectsCountResultType
+      
         do {
-            try context.execute(deleteRequest)
-            try context.save()
+          try moc.execute(updateRequest)
         } catch let error as NSError {
-            debugPrint(error)
+          let fetchError = error as NSError
+          print(fetchError)
         }
-        
-        self.addPlaylistItems(items,finish: {})
+        finish()
+    }
+  
+  
+    
+    func replacePlaylistItemsWith(_ items:[TrackItem]){
+      let context = persistentContainer.viewContext
+      self.clearPlaylistQueue(context: context) {
+        try? context.save()
+        self.addPlaylistItems(items){
+          print("updated")
+        }
+      }
     }
     
     
@@ -278,50 +303,39 @@ class DBManager: NSObject {
         }
     }
     
-    func getActivePlaylist() -> [TrackItem]{
+  func getActivePlaylist(rez:@escaping (Array<TrackItem>)->Void){
         let context = persistentContainer.viewContext
-        let request : NSFetchRequest<ActivePlaylistObject> = ActivePlaylistObject.fetchRequest()
+        let request : NSFetchRequest<FileObject> = FileObject.fetchRequest()
+        request.predicate = NSPredicate(format: "is_in_queue == %@", true as NSNumber)
         var rezOut:Array<TrackItem> = []
         do {
-            let searchResults = try request.execute()
-            for item:ActivePlaylistObject in searchResults{
-                let el:TrackItem = TrackItem(item.fileobject!)
+            let searchResults = try context.fetch(request)
+            for item in searchResults{
+                let el:TrackItem = TrackItem(item)
                 rezOut.append(el)
             }
         } catch {
             let fetchError = error as NSError
             print(fetchError)
         }
-        return rezOut
+        rez(rezOut)
     }
     
     func getNextPlaylistItem () -> TrackItem? {
         let context = persistentContainer.viewContext
-        let request : NSFetchRequest<ActivePlaylistObject> = ActivePlaylistObject.fetchRequest()
+        let request : NSFetchRequest<FileObject> = FileObject.fetchRequest()
         request.fetchLimit = 1
-        //request.sortDescriptors = NSSortDescriptor(key: "name", ascending: true)
-        //request.predicate = NSPredicate(format: "SELF.fileobject.playcount == fileobject.@min.playcount")
-        
-        
-        
-        //http://www.cimgf.com/2015/06/25/core-data-and-aggregate-fetches-in-swift/
-        
-        let kexp = NSExpression(forKeyPath: "fileobject.playcount")
-        let minExp = NSExpression(forFunction: "min:", arguments: [kexp])
-        let expr = NSExpressionDescription()
-        expr.name = "minPlay"
-        expr.expression = minExp
-        expr.expressionResultType = .doubleAttributeType
-        var expAny = [AnyObject]()
-        expAny.append(expr)
-        request.propertiesToFetch = expAny
+        request.predicate = NSPredicate(format: "is_in_queue == %@", true as NSNumber)
+        request.sortDescriptors = [NSSortDescriptor(key: "playcount", ascending: true)]
 
-        
         var rez:TrackItem? = nil
         do {
-            let searchResults = try request.execute()
+          
+            let searchResults = try context.fetch(request)
             if let item = searchResults.first {
-                rez = TrackItem(item.fileobject!)
+                item.playcount = item.playcount + 1
+                try context.save()
+                rez = TrackItem(item)
             }
         } catch {
             let fetchError = error as NSError
@@ -329,6 +343,29 @@ class DBManager: NSObject {
         }
         return rez
     }
-    
-    
+  
+//  func updateStatCount(context:NSManagedObjectContext?, finish:@escaping ()->Void){
+//      let moc:NSManagedObjectContext = (context != nil) ? context! : persistentContainer.viewContext
+//      moc.perform({ () -> Void in
+//        do {
+//          for item in items
+//          {
+//            let request : NSFetchRequest<FileObject> = FileObject.fetchRequest()
+//            request.predicate = NSPredicate(format: "item_id == %@", item.id as NSNumber)
+//            request.fetchLimit = 1
+//            let searchResults = try request.execute()
+//            if let fo:FileObject = searchResults.first {
+//              fo.is_in_queue = true
+//            }
+//          }
+//          try context.save()
+//        } catch {
+//          print("Error with request: \(error)")
+//        }
+//        finish()
+//      });
+//    
+//  }
+  
+  
 }

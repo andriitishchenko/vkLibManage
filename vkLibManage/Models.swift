@@ -23,21 +23,21 @@ struct ProgressType {
 }
 
 class TrackItem: NSObject {
-    var id:Int = 0
-    var album_id:Int = 0;
+    var id:Double = 0
+    var album_id:Double = 0;
     var artist:String = "";
     var duration:Int = 0;
-    var lyrics_id:Int = 0;
-    var owner_id:Int = 0;
+    var lyrics_id:Double = 0;
+    var owner_id:Double = 0;
     var title:String = "";
     var url:String = "";
     var status:FileObjectStatus = .None;
     
     init(_ param:FileObject) {
-        id = Int(param.item_id)
+        id = param.item_id
         title = param.title!
         artist = param.artist!
-        album_id = Int(param.playlist_id)
+        album_id = param.playlist_id
         url = param.url!
         status = FileObjectStatus(rawValue: param.status)!
     }

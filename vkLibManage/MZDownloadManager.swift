@@ -368,7 +368,7 @@ extension MZDownloadManager: URLSessionDelegate {
 
 extension MZDownloadManager {
     
-    public func addDownloadTask(_ fileName: String, fileURL: String, destinationPath: String, tag: Int?) {
+    public func addDownloadTask(_ fileName: String, fileURL: String, destinationPath: String, tag: Double?) {
         
         let url = URL(string: fileURL as String)!
         let request = URLRequest(url: url)
@@ -389,7 +389,7 @@ extension MZDownloadManager {
         delegate?.downloadRequestStarted?(downloadModel, index: downloadingArray.count - 1)
     }
     
-    public func addDownloadTask(_ fileName: String, fileURL: String,tag:Int?) {
+    public func addDownloadTask(_ fileName: String, fileURL: String,tag:Double?) {
         addDownloadTask(fileName, fileURL: fileURL, destinationPath: "",tag:tag)
     }
     

@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G31" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="ActivePlaylistObject" representedClassName=".ActivePlaylistObject" syncable="YES">
-        <attribute name="item_id" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="fileobject" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FileObject" inverseName="activePlaylist" inverseEntity="FileObject" syncable="YES"/>
-    </entity>
     <entity name="FileObject" representedClassName=".FileObject" syncable="YES">
         <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="is_in_queue" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="item_id" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="playcount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="playlist_id" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="activePlaylist" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ActivePlaylistObject" inverseName="fileobject" inverseEntity="ActivePlaylistObject" syncable="YES"/>
         <relationship name="playlist" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="PlaylistObject" inverseName="files" inverseEntity="PlaylistObject" syncable="YES"/>
     </entity>
     <entity name="PlaylistObject" representedClassName=".PlaylistObject" syncable="YES">
@@ -26,6 +22,5 @@
     <elements>
         <element name="FileObject" positionX="-389" positionY="27" width="128" height="193"/>
         <element name="PlaylistObject" positionX="-612" positionY="-99" width="128" height="118"/>
-        <element name="ActivePlaylistObject" positionX="-83" positionY="-82" width="128" height="73"/>
     </elements>
 </model>

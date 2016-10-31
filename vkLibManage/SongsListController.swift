@@ -19,14 +19,14 @@ class SongsListController: BaseTableController {
         self.reload()
         self.pullRefreshInection()
         
-        let play = UIBarButtonItem(title: "Down", style: .plain, target: self, action: #selector(download_album))
+        let play = UIBarButtonItem(title: "Queue", style: .plain, target: self, action: #selector(show_playlist))
         self.navigationItem.rightBarButtonItems = [play]
         
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func download_album(sender: UIButton?) {
-        SyncManager.sharedInstance.downloadPlaylist(self.album!)
+    @IBAction func show_playlist(sender: UIButton?) {
+       self.performSegue(withIdentifier: "showActivePlaylistController", sender: self)
     }
     
     
@@ -71,7 +71,7 @@ class SongsListController: BaseTableController {
             
             break
             case 100: //download
-                
+                SyncManager.sharedInstance.downloadPlaylist(self.album!)
             break
             case 10: //move
             
@@ -85,11 +85,12 @@ class SongsListController: BaseTableController {
             default:break
             
         }
-        
-        
-        
-        
     }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //let vc:ActivePlaylistController = segue.destination as! ActivePlaylistController
+   
+  }
 
     /*
     // MARK: - Navigation

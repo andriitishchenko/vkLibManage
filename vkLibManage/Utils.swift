@@ -32,18 +32,18 @@ class Utils: NSObject {
 }
 
 extension FileManager {
-    static func isFileExistForID(_ id:Int) -> Bool{
+    static func isFileExistForID(_ id:Double) -> Bool{
         let filepath = FileManager.makeFilePathForID(id)
         let url : URL = URL(fileURLWithPath: filepath as String)
         return FileManager.default.fileExists(atPath: url.path)
     }
     
-    static func makeFilePathForID(_ id:Int)->String{
+    static func makeFilePathForID(_ id:Double)->String{
         let fname:String = FileManager.makeFileNameForID(id);
         return (MZUtility.baseFilePath as NSString).appendingPathComponent(fname)
     }
     
-    static func makeFileNameForID(_ id:Int)->String{
-        return String(id).appending(".mp3")
+    static func makeFileNameForID(_ id:Double)->String{
+        return String(format: "%.0f",id).appending(".mp3")
     }
 }
