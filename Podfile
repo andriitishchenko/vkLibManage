@@ -6,7 +6,7 @@ use_frameworks!
 target "vkLibManage" do
     pod 'VK-ios-sdk'
     pod "YYModel"
-    pod 'Jukebox'
+    #pod 'Jukebox'
     #pod "MZDownloadManager"
     #pod 'REFrostedViewController'
     #pod 'JSONModel'

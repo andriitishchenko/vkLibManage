@@ -77,7 +77,12 @@ class SongsListController: BaseTableController {
             
             break
             case 50: //play
-                Player.sharedInstance.PlayTrackStandalone(item!)
+                if let playItem = item {
+                    Player.sharedInstance.PlayTrackStandalone(playItem)
+                }
+                else if let playItem:TrackItem = self.dataSource?[0] as! TrackItem? {
+                    Player.sharedInstance.PlayTrackStandalone(playItem)
+                }
             break
             case 60: //add to queue
                 Player.sharedInstance.addTracksToPlayQueue(self.dataSource as! [TrackItem])

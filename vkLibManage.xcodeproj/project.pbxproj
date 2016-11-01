@@ -30,6 +30,8 @@
 		FE8638301DA56CBA00532752 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FE86382E1DA56CBA00532752 /* LaunchScreen.storyboard */; };
 		FE86383B1DA56CBA00532752 /* vkLibManageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE86383A1DA56CBA00532752 /* vkLibManageTests.swift */; };
 		FE8638461DA56CBA00532752 /* vkLibManageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8638451DA56CBA00532752 /* vkLibManageUITests.swift */; };
+		FE99A2D11DC9222E004EEC8D /* PlayerControlsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE99A2D01DC9222E004EEC8D /* PlayerControlsView.xib */; };
+		FE99A2D31DC92B46004EEC8D /* PlayerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE99A2D21DC92B46004EEC8D /* PlayerControlsView.swift */; };
 		FEB6739E1DA7CE1D00AD93A8 /* PlaylistController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB6739D1DA7CE1D00AD93A8 /* PlaylistController.swift */; };
 		FED1C1FD1DBF6B51009F6533 /* PrivatPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED1C1FC1DBF6B51009F6533 /* PrivatPlayer.swift */; };
 		FEDAFD391DAB989B001BDC70 /* vkLibManage.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FEDAFD371DAB989B001BDC70 /* vkLibManage.xcdatamodeld */; };
@@ -86,6 +88,8 @@
 		FE8638411DA56CBA00532752 /* vkLibManageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = vkLibManageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE8638451DA56CBA00532752 /* vkLibManageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vkLibManageUITests.swift; sourceTree = "<group>"; };
 		FE8638471DA56CBA00532752 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE99A2D01DC9222E004EEC8D /* PlayerControlsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerControlsView.xib; sourceTree = "<group>"; };
+		FE99A2D21DC92B46004EEC8D /* PlayerControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerControlsView.swift; sourceTree = "<group>"; };
 		FEB6739D1DA7CE1D00AD93A8 /* PlaylistController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistController.swift; sourceTree = "<group>"; };
 		FED1C1FC1DBF6B51009F6533 /* PrivatPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivatPlayer.swift; sourceTree = "<group>"; };
 		FEDAFD381DAB989B001BDC70 /* test.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = test.xcdatamodel; sourceTree = "<group>"; };
@@ -184,6 +188,8 @@
 				FE5DB62C1DB8D0A6004281BB /* Utils.swift */,
 				FE8638271DA56CBA00532752 /* ViewController.swift */,
 				FE8638291DA56CBA00532752 /* Main.storyboard */,
+				FE99A2D01DC9222E004EEC8D /* PlayerControlsView.xib */,
+				FE99A2D21DC92B46004EEC8D /* PlayerControlsView.swift */,
 				FE86382C1DA56CBA00532752 /* Assets.xcassets */,
 				FE86382E1DA56CBA00532752 /* LaunchScreen.storyboard */,
 				FE8638311DA56CBA00532752 /* Info.plist */,
@@ -359,6 +365,7 @@
 				FE8638301DA56CBA00532752 /* LaunchScreen.storyboard in Resources */,
 				FE86382D1DA56CBA00532752 /* Assets.xcassets in Resources */,
 				FE86382B1DA56CBA00532752 /* Main.storyboard in Resources */,
+				FE99A2D11DC9222E004EEC8D /* PlayerControlsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +443,7 @@
 				FED1C1FD1DBF6B51009F6533 /* PrivatPlayer.swift in Sources */,
 				FEDAFD3B1DAB9CD2001BDC70 /* SyncManager.swift in Sources */,
 				FE8638281DA56CBA00532752 /* ViewController.swift in Sources */,
+				FE99A2D31DC92B46004EEC8D /* PlayerControlsView.swift in Sources */,
 				FE2BAF7F1DAD06430011A782 /* MZUtility.swift in Sources */,
 				FE27CB931DBA2FB500217F60 /* PlaylistObject+CoreDataClass.swift in Sources */,
 				FE27CB911DBA2FB500217F60 /* FileObject+CoreDataClass.swift in Sources */,

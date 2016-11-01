@@ -94,37 +94,19 @@ class PrivatPlayer: NSObject {
     weak var delegate    :   PrivatPlayerDelegate?
     weak var delegateUI  :   PrivatPlayerDelegateUI?
     let player = AVPlayer()
-    let commandCenter:MPRemoteCommandCenter = MPRemoteCommandCenter.shared()
-    
-    
-//    public var remoteNottification:Bool = false {
-//        didSet {
-////            if (self.remoteNottification)
-////            {
-//////                self.canBecomeFirstResponder()
-////                UIApplication.shared.beginReceivingRemoteControlEvents()
-////            }
-////            else
-////            {
-////                UIApplication.shared.endReceivingRemoteControlEvents()
-////            }
-//        }
-//    }
     
     private var playerItem: AVPlayerItem? = nil {
         didSet {
-            
-            player.replaceCurrentItem(with: self.playerItem)
-            
             if self.playerItem != nil {
                 NotificationCenter.default.addObserver(self, selector: #selector(self.playerItemDidPlayToEnd(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.playerItem)
                 
                 self.metaInfo?.duration = CMTimeGetSeconds((playerItem?.duration)!)
+                
                 self.extractMeta(self.playerItem!, onUpdate: { item in
                     self.metaInfo?.update(item)
                 })
                 
-                
+                player.replaceCurrentItem(with: self.playerItem)
                 player.play()
             }
             else{
@@ -162,7 +144,6 @@ class PrivatPlayer: NSObject {
     var asset: AVURLAsset? {
         didSet {
             guard let newAsset = asset else { return }
-            
             asynchronouslyLoadURLAsset(newAsset)
         }
     }
@@ -225,28 +206,25 @@ class PrivatPlayer: NSObject {
         }
     }
     
-    func play(_ media:PrivatPlayerMediaItem){
-        self.metaInfo = media
+    private func updateasset(){
         if let url:URL = self.metaInfo?.url {
             asset = AVURLAsset(url: url, options: nil)
         }
     }
     
-    func requestNextAndPlay(){
+    func play(_ media:PrivatPlayerMediaItem){
+        self.metaInfo = media
+        self.updateasset()
+    }
     
+    func requestNextAndPlay(){
         self.metaInfo = self.delegate?.privatPlayerGetNextTrack()
-        
-        if let url:URL = self.metaInfo?.url {
-            asset = AVURLAsset(url: url, options: nil)
-        }
+        self.updateasset()
     }
     
     func requestPrevAndPlay(){
         self.metaInfo = self.delegate?.privatPlayerGetPrevTrack()
-        
-        if let url:URL = self.metaInfo?.url {
-            asset = AVURLAsset(url: url, options: nil)
-        }
+        self.updateasset()
      }
     
     
@@ -259,56 +237,27 @@ class PrivatPlayer: NSObject {
 
     
     func asynchronouslyLoadURLAsset(_ newAsset: AVURLAsset) {
-        /*
-         Using AVAsset now runs the risk of blocking the current thread (the
-         main UI thread) whilst I/O happens to populate the properties. It's
-         prudent to defer our work until the properties we need have been loaded.
-         */
         newAsset.loadValuesAsynchronously(forKeys: PrivatPlayer.assetKeysRequiredToPlay) {
-            /*
-             The asset invokes its completion handler on an arbitrary queue.
-             To avoid multiple threads using our internal state at the same time
-             we'll elect to use the main thread at all times, let's dispatch
-             our handler to the main queue.
-             */
             DispatchQueue.main.async {
-                /*
-                 `self.asset` has already changed! No point continuing because
-                 another `newAsset` will come along in a moment.
-                 */
                 guard newAsset == self.asset else { return }
                 
-                /*
-                 Test whether the values of each of the keys we need have been
-                 successfully loaded.
-                 */
                 for key in PrivatPlayer.assetKeysRequiredToPlay {
                     var error: NSError?
                     
                     if newAsset.statusOfValue(forKey: key, error: &error) == .failed {
                         let stringFormat = NSLocalizedString("error.asset_key_%@_failed.description", comment: "Can't use this AVAsset because one of it's keys failed to load")
-                        
                         let message = String.localizedStringWithFormat(stringFormat, key)
-                        
                         self.handleErrorWithMessage(message, error: error)
-                        
                         return
                     }
                 }
                 
-                // We can't play this asset.
                 if !newAsset.isPlayable || newAsset.hasProtectedContent {
                     let message = NSLocalizedString("error.asset_not_playable.description", comment: "Can't use this AVAsset because it isn't playable or has protected content")
-                    
                     self.handleErrorWithMessage(message)
-                    
                     return
                 }
                 
-                /*
-                 We can play this asset. Create a new `AVPlayerItem` and make
-                 it our player's current item.
-                 */
                 self.playerItem = AVPlayerItem(asset: newAsset)
             }
         }
@@ -391,13 +340,13 @@ class PrivatPlayer: NSObject {
     }
     
     // MARK: - Error Handling
-
-    
     func handleErrorWithMessage(_ message: String?, error: Error? = nil) {
         NSLog("||| Error occured with message:/n \(message), error: \(error).")
         self.delegateUI?.privatPlayerUIError(message, error: error)
     }
 
+    
+    // MARK: - Observers Handling
     func registerUpdates()
     {
         addObserver(self, forKeyPath: #keyPath(PrivatPlayer.player.currentItem.duration), options: [.new, .initial], context: &PrivatPlayerKVOContext)
@@ -484,7 +433,6 @@ class PrivatPlayer: NSObject {
     {
         DispatchQueue.global(qos: .background).async {
             let metadataArray = mediaItem.asset.commonMetadata
-            
             for item in metadataArray
             {
                 item.loadValuesAsynchronously(forKeys: [AVMetadataKeySpaceCommon], completionHandler: { () -> Void in
@@ -507,7 +455,7 @@ class PrivatPlayer: NSObject {
                 MPNowPlayingInfoPropertyElapsedPlaybackTime : item.time as AnyObject,
 //                MPNowPlayingInfoPropertyPlaybackQueueCount :1 as AnyObject,
 //                MPNowPlayingInfoPropertyPlaybackQueueIndex : 0 as AnyObject,
-//                MPMediaItemPropertyMediaType : MPMediaType.anyAudio.rawValue as AnyObject
+                MPMediaItemPropertyMediaType : MPMediaType.anyAudio.rawValue as AnyObject
             ]
             
             if let artist = item.artist {
@@ -554,12 +502,14 @@ class PrivatPlayer: NSObject {
     
     override init() {
         super.init()
-//        self.commandCenter.pauseCommand.enabled = true
-        self.commandCenter.pauseCommand.addTarget(self, action: #selector(self._pause))
-        self.commandCenter.playCommand.addTarget(self, action: #selector(self._play))
-        self.commandCenter.nextTrackCommand.addTarget(self, action: #selector(self._next))
-        self.commandCenter.previousTrackCommand.addTarget(self, action: #selector(self._prev))
-        self.commandCenter.togglePlayPauseCommand.addTarget(self, action: #selector(self._togle))
+        let commandCenter:MPRemoteCommandCenter = MPRemoteCommandCenter.shared()
+//        commandCenter.pauseCommand.enabled = true
+        commandCenter.pauseCommand.addTarget(self, action: #selector(self._pause))
+        commandCenter.playCommand.addTarget(self, action: #selector(self._play))
+        commandCenter.nextTrackCommand.addTarget(self, action: #selector(self._next))
+        commandCenter.previousTrackCommand.addTarget(self, action: #selector(self._prev))
+        commandCenter.togglePlayPauseCommand.addTarget(self, action: #selector(self._togle))
+        self.registerUpdates()
     }
     
     deinit {
