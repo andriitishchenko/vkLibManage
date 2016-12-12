@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import VK_ios_sdk
+
 typealias Dic = Dictionary<String,AnyObject>
 
 class API{

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import VK_ios_sdk
 
 //= "notificationProgress"
 //let notificationProgress: String = "notificationProgress"

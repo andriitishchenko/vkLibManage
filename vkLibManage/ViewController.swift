@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import VK_ios_sdk
 
 public struct Consts{
     static let SCOPE = [VK_PER_FRIENDS, VK_PER_WALL, VK_PER_AUDIO];

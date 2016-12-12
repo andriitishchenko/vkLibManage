@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, "9.0"
+platform :ios, "9.3"
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 #link_with ['vkLibManage', 'vkLibManageTests']
